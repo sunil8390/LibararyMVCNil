@@ -1,0 +1,44 @@
+﻿@model IEnumerable<LibararyMVCNil.DAL.Books>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SearchBook</title>
+</head>
+<body>
+    <div style="display:flex; padding: 30px; margin:30px; font-weight:900; font-family:Calibri">
+     
+
+
+
+
+        <div style="margin-right:20px;">
+            Search Books
+            <input type="text" name="book" value="Book Search" />
+        </div>
+
+        <div style="margin-right:20px;">
+            @Html.DropDownList("categorylist.", "Select Category Name")
+        </div>
+
+        <div style="margin-right:20px;">
+            @Html.DropDownList("Publisherlist", "Select Publisherlist Name")
+        </div>
+
+
+
+    </div>
+
+
+    <div style="margin-left:200px;">
+        <input type="submit" name="name" value="Search" />
+        <input type="submit" name="name" value="Rest" />
+    </div>
+</body>
+</html>

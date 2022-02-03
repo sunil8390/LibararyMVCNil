@@ -1,0 +1,55 @@
+﻿@model IEnumerable<LibararyMVCNil.DAL.Books>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table border="1">
+    <tr>
+        <td></td>
+       
+
+       
+    </tr>
+</table>
+
+
+<table border="1" style="text-align:center">
+    <tr>
+        <th>BookId</th>
+        <th>BookName</th>
+        <th>CategoryName</th>
+        <th>PublisherName</th>
+        @*<th>Quantity</th>
+            <th>IsActive</th>
+            <th>ModifiedBy</th>
+            <th>ModifiedOn</th>
+            <th>CreatedBy</th>
+            <th>CreatedOn</th>*@
+
+    </tr>
+
+    @foreach (var Book in Model)
+    {
+        <tr>
+            <td>@Book.BookId</td>
+            <td>@Book.BookName</td>
+            <td>@Book.CategoryName</td>
+            <td>@Book.PublisherName</td>
+
+            @*<td>@Book.Quantity.</td>
+                <td>@Book.IsActive.</td>
+
+                <td>@Book.ModifiedBy.</td>
+                <td>@Book.ModifiedOn.</td>
+                <td>@Book.CreatedBy.</td>
+                <td>@Book.CreatedOn.</td>*@
+
+        </tr>
+    }
+
+</table>
+
