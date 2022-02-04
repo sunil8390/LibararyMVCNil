@@ -7,6 +7,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using Microsoft.Practices.EnterpriseLibrary.Common;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using LibararyMVCNil.ViewModel;
 
 namespace LibararyMVCNil.DAL
 {
@@ -395,10 +396,11 @@ namespace LibararyMVCNil.DAL
         /// </summary>
         /// <returns>DataSet of result</returns>
         /// <remarks></remarks>
-        public DataSet GetList()
-            {
+        public List<BooksViewModel> GetList()
+         {
+           
             DataSet ds = null;
-            
+
             try
             {
 
@@ -429,7 +431,21 @@ namespace LibararyMVCNil.DAL
                     this.db.AddInParameter(com, "PublisherId", DbType.Int32, DBNull.Value);
                 }
                 ds = db.ExecuteDataSet(com);
-                
+                var book = (from DataRow dr in ds.Tables[0].Rows
+                            select new BooksViewModel()
+                            {
+                                BookId = Convert.ToInt32(dr["BookId"]),
+                                BookName = dr["BookName"].ToString(),
+                                CategoryId = Convert.ToInt32(dr["CategoryId"]),
+                                CategoryName = dr["CategoryName"].ToString(),
+                                PublisherId = Convert.ToInt32(dr["PublisherId"]),
+                                PublisherName = dr["PublisherName"].ToString()
+
+                            }).ToList();
+
+                return book;
+
+
 
             }
             catch (Exception ex)
@@ -437,8 +453,10 @@ namespace LibararyMVCNil.DAL
                 //To Do: Handle Exception
             }
 
-            return ds;
+            return null ;
         }
+
+
         #endregion
     }
 }

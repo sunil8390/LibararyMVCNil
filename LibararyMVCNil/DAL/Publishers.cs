@@ -117,14 +117,21 @@ namespace LibararyMVCNil.DAL
         /// </summary>
         /// <returns>DataSet of result</returns>
         /// <remarks></remarks>
-        public DataSet GetList()
+        public List<Publishers> GetList()
         {
             DataSet ds = null;
             try
             {
                 DbCommand com = db.GetStoredProcCommand("PublishersGetDetails");
                 ds = db.ExecuteDataSet(com);
+                var Publishers = (from DataRow dr in ds.Tables[0].Rows
+                                  select new Publishers()
+                                  {
+                                      PublisherId = Convert.ToInt32(dr["PublisherId"]),
+                                      PublisherName = dr["PublisherName"].ToString()
+                                  }).ToList();
 
+                return Publishers;
 
             }
             catch (Exception ex)
@@ -132,7 +139,7 @@ namespace LibararyMVCNil.DAL
                 //To Do: Handle Exception
             }
 
-            return ds;
+            return null;
         }
         #endregion
 

@@ -31,22 +31,22 @@ namespace LibararyMVCNil.Controllers
         {
 
 
-            Books db = new Books();
-            List<Books> BookLists = new List<Books>();
+            //Books db = new Books();
+            //List<Books> BookLists = new List<Books>();
 
-            DataSet dt = db.GetList();
-            BookLists = (from DataRow dr in dt.Tables[0].Rows
-                         select new Books()
-                         {
-                             BookId = Convert.ToInt32(dr["BookId"]),
-                             BookName = dr["BookName"].ToString(),
-                             CategoryName = dr["CategoryName"].ToString(),
+            //DataSet dt = db.GetList();
+            //BookLists = (from DataRow dr in dt.Tables[0].Rows
+            //             select new Books()
+            //             {
+            //                 BookId = Convert.ToInt32(dr["BookId"]),
+            //                 BookName = dr["BookName"].ToString(),
+            //                 CategoryName = dr["CategoryName"].ToString(),
 
-                             PublisherName = dr["PublisherName"].ToString()
+            //                 PublisherName = dr["PublisherName"].ToString()
 
-                         }).ToList();
+            //             }).ToList();
 
-            return View(BookLists);
+            return View(/*BookList*/);
 
 
 
@@ -57,57 +57,57 @@ namespace LibararyMVCNil.Controllers
         public ActionResult SearchBook() // using view bag 
         {
             
-                //book dropdown using viewbag
-                Books db = new Books();
-                DataSet ds = db.GetList();
+     //book dropdown using viewbag
+            //    Books db = new Books();
+            //    DataSet ds = db.GetList();
 
-                var Bklist = (from DataRow dr in ds.Tables[0].Rows 
-                             select new Books() 
-                              {
-                                  BookId = Convert.ToInt32(dr["bookid"]),
-                                  BookName = dr["bookname"].ToString(),
+            //    var Bklist = (from DataRow dr in ds.Tables[0].Rows 
+            //                 select new Books() 
+            //                  {
+            //                      BookId = Convert.ToInt32(dr["bookid"]),
+            //                      BookName = dr["bookname"].ToString(),
                                 
                                   
 
-                              }).ToList();
+            //                  }).ToList();
 
 
-            ViewBag.booklist = new SelectList(Bklist, "BookId", "BookName");
+            //ViewBag.booklist = new SelectList(Bklist, "BookId", "BookName");
 
-            //Categories dropdown using viewbag
-            Categories cdb = new Categories();
-            DataSet cds = cdb.GetList();
+     //Categories dropdown using viewbag
+            //Categories cdb = new Categories();
+            //DataSet cds = cdb.GetList();
 
-            var Ctlist = (from DataRow dr in cds.Tables[0].Rows
-                          select new Categories()
-                          {
+            //var Ctlist = (from DataRow dr in cds.Tables[0].Rows
+            //              select new Categories()
+            //              {
                               
-                              CategoryId = Convert.ToInt32(dr["CategoryId"]),
-                              CategoryName = dr["CategoryName"].ToString(),
+            //                  CategoryId = Convert.ToInt32(dr["CategoryId"]),
+            //                  CategoryName = dr["CategoryName"].ToString(),
 
 
-                          }).ToList();
+            //              }).ToList();
 
 
-            ViewBag.categorylist = new SelectList(Ctlist, "CategoryId", "CategoryName");
+            //ViewBag.categorylist = new SelectList(Ctlist, "CategoryId", "CategoryName");
 
 
 
-            //Publishers dropdown using viewbag
-            Publishers pdb = new Publishers();
-            DataSet pds = pdb.GetList();
+     //Publishers dropdown using viewbag
+            //Publishers pdb = new Publishers();
+            //DataSet pds = pdb.GetList();
 
-            var plist = (from DataRow dr in pds.Tables[0].Rows
-                          select new Publishers()
-                          {
+            //var plist = (from DataRow dr in pds.Tables[0].Rows
+            //              select new Publishers()
+            //              {
 
-                              PublisherId = Convert.ToInt32(dr["PublisherId"]),
-                              PublisherName = dr["PublisherName"].ToString(),
+            //                  PublisherId = Convert.ToInt32(dr["PublisherId"]),
+            //                  PublisherName = dr["PublisherName"].ToString(),
 
 
-                          }).ToList();
+            //              }).ToList();
 
-            ViewBag.Publisherlist = new SelectList(plist, "PublisherId", "PublisherName");
+            //ViewBag.Publisherlist = new SelectList(plist, "PublisherId", "PublisherName");
 
 
             return View();
@@ -119,63 +119,89 @@ namespace LibararyMVCNil.Controllers
 
         }
 
+        //public List<Books> DataConversion()
+        //{
+        //    Books db = new Books();
+        //    //List<Books> bklist = new List<Books>();
+        //    DataSet ds_bk = db.GetList();
+
+        //    var book = (from DataRow dr in ds_bk.Tables[0].Rows
+        //                select new Books()
+        //                {
+        //                    BookId = Convert.ToInt32(dr["BookId"]),
+        //                    BookName = dr["BookName"].ToString(),
+        //                    CategoryId = Convert.ToInt32(dr["CategoryId"]),
+        //                    CategoryName = dr["CategoryName"].ToString(),
+        //                    PublisherId = Convert.ToInt32(dr["PublisherId"]),
+        //                    PublisherName = dr["PublisherName"].ToString()
+
+        //                }).ToList();
+
+        //    return book;
+
+
+
+
+        //}
+
         public ActionResult SearchBook1() //using model serach book catgeories and publisher 
 
         {
             BooksViewModel model =new BooksViewModel();
-            Books db = new Books();
-
-            // book
-            DataSet ds = db.GetList();
+           
             Books Books = new Books();
-            DataSet ds_bk = Books.GetList();
+            model.booklist = Books.GetList();
 
-            var book = (from DataRow dr in ds_bk.Tables[0].Rows
-                            select new BooksViewModel()
-                            {
-                                BookId = Convert.ToInt32(dr["BookId"]),
-                                BookName = dr["BookName"].ToString(),
-                               CategoryId = Convert.ToInt32(dr["CategoryId"]),
-                                CategoryName = dr["CategoryName"].ToString(), 
-                                PublisherId = Convert.ToInt32(dr["PublisherId"]),
-                                PublisherName = dr["PublisherName"].ToString()
+            //var book = (from DataRow dr in ds_bk.Tables[0].Rows
+            //                select new BooksViewModel()
+            //                {
+            //                    BookId = Convert.ToInt32(dr["BookId"]),
+            //                    BookName = dr["BookName"].ToString(),
+            //                   CategoryId = Convert.ToInt32(dr["CategoryId"]),
+            //                    CategoryName = dr["CategoryName"].ToString(), 
+            //                    PublisherId = Convert.ToInt32(dr["PublisherId"]),
+            //                    PublisherName = dr["PublisherName"].ToString()
 
-                            }).ToList();
+            //                }).ToList();
+            //var book = db.DataConversion();
 
-            model.booklist = book;
+            //model.booklist = book;
 
 
 
-            //categories
+     //categories
            // DataSet cds = db.GetList();
             Categories categories = new Categories();
-            DataSet ds_cat = categories.GetList();
+            model.categorylist = categories.GetList();
 
-            var category = (from DataRow dr in ds_cat.Tables[0].Rows
-                            select new Categories()
-                            {
-                                CategoryId = Convert.ToInt32(dr["CategoryId"]),
-                                CategoryName = dr["CategoryName"].ToString()
-                            }).ToList();
+            //var category = (from DataRow dr in ds_cat.Tables[0].Rows
+            //                select new Categories()
+            //                {
+            //                    CategoryId = Convert.ToInt32(dr["CategoryId"]),
+            //                    CategoryName = dr["CategoryName"].ToString()
+            //                }).ToList();
 
-            model.categorylist = category;
-
-
+            //model.categorylist = category;
 
 
-            //Publishers
+
+
+      //Publishers
 
             ///DataSet pds = db.GetList();
             Publishers Publisher = new Publishers();
-            DataSet ds_pub = Publisher.GetList();
+            //DataSet ds_pub = Publisher.GetList();
+            model.publisherlist = Publisher.GetList();
 
-            var Publishers = (from DataRow dr in ds_pub.Tables[0].Rows
-                              select new Publishers()
-                              {
-                                  PublisherId = Convert.ToInt32(dr["PublisherId"]),
-                                  PublisherName = dr["PublisherName"].ToString()
-                              }).ToList();
-            model.publisherlist = Publishers;
+            //var Publishers = (from DataRow dr in ds_pub.Tables[0].Rows
+            //                  select new Publishers()
+            //                  {
+            //                      PublisherId = Convert.ToInt32(dr["PublisherId"]),
+            //                      PublisherName = dr["PublisherName"].ToString()
+            //                  }).ToList();
+            //model.publisherlist = Publishers;
+
+
             return View(model);
 
            
@@ -227,57 +253,60 @@ namespace LibararyMVCNil.Controllers
 
             //book
             //  Books Books = new Books();
-            DataSet ds_bk = db.GetList();  //a;
-
-            var book = (from DataRow dr in ds_bk.Tables[0].Rows
-                            select new BooksViewModel()
-                            {
-                                BookId = Convert.ToInt32(dr["BookId"]),
-                                BookName = dr["BookName"].ToString(),
-                                CategoryId = Convert.ToInt32(dr["CategoryId"]),
-                                CategoryName = dr["CategoryName"].ToString(), 
-                                PublisherId = Convert.ToInt32(dr["PublisherId"]),
-                                PublisherName = dr["PublisherName"].ToString()
-
-                            }).ToList();
-
-            Model.booklist = book;
+            //DataSet ds_bk = Publisher.GetList();
+            Model.booklist = db.GetList();  //a;
 
 
+            //var book = (from DataRow dr in ds_bk.Tables[0].Rows
+            //                 select new BooksViewModel()
+            //                 {
+            //                     BookId = Convert.ToInt32(dr["BookId"]),
+            //                     BookName = dr["BookName"].ToString(),
+            //                     CategoryId = Convert.ToInt32(dr["CategoryId"]),
+            //                     CategoryName = dr["CategoryName"].ToString(), 
+            //                     PublisherId = Convert.ToInt32(dr["PublisherId"]),
+            //                     PublisherName = dr["PublisherName"].ToString()
 
-            //categories
+            //                 }).ToList();
+
+            
+
+    //categories
             Categories categories = new Categories();
-            DataSet ds_cat = categories.GetList();
+            //DataSet ds_cat = Publisher.GetList();
+            Model.categorylist = categories.GetList();
 
-            var category = (from DataRow dr in ds_cat.Tables[0].Rows
-                            select new Categories()
-                            {
-                                CategoryId = Convert.ToInt32(dr["CategoryId"]),
-                                CategoryName = dr["CategoryName"].ToString()
-                            }).ToList();
+            //var category = (from DataRow dr in ds_cat.Tables[0].Rows
+            //                select new Categories()
+            //                {
+            //                    CategoryId = Convert.ToInt32(dr["CategoryId"]),
+            //                    CategoryName = dr["CategoryName"].ToString()
+            //                }).ToList();
 
-            Model.categorylist = category;
-
-
+            //Model.categorylist = category;
 
 
-            //Publishers
+
+    //Publishers
             Publishers Publisher = new Publishers();
-            DataSet ds_pub = Publisher.GetList();
+            //DataSet ds_pub = Publisher.GetList();
+            Model.publisherlist = Publisher.GetList();
 
-            var Publishers = (from DataRow dr in ds_pub.Tables[0].Rows
-                              select new Publishers()
-                              {
-                                  PublisherId = Convert.ToInt32(dr["PublisherId"]),
-                                  PublisherName = dr["PublisherName"].ToString()
-                              }).ToList();
-            Model.publisherlist = Publishers;
+            //var Publishers = (from DataRow dr in ds.Tables[0].Rows
+            //                  select new Publishers()
+            //                  {
+            //                      PublisherId = Convert.ToInt32(dr["PublisherId"]),
+            //                      PublisherName = dr["PublisherName"].ToString()
+            //                  }).ToList();
+            //Model.publisherlist = Publishers;
 
 
 
             return View(Model);
 
+
         }
+       
 
 
         public ActionResult SearchBook2( )

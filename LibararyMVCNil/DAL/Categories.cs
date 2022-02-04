@@ -112,20 +112,27 @@ namespace LibararyMVCNil.DAL
         /// </summary>
         /// <returns>DataSet of result</returns>
         /// <remarks></remarks>
-        public DataSet GetList()
+        public List<Categories> GetList()
         {
             DataSet ds = null;
             try
             {
                 DbCommand com = db.GetStoredProcCommand("CategoriesGetDetails");
                 ds = db.ExecuteDataSet(com);
+                var category = (from DataRow dr in ds.Tables[0].Rows
+                                select new Categories()
+                                {
+                                    CategoryId = Convert.ToInt32(dr["CategoryId"]),
+                                    CategoryName = dr["CategoryName"].ToString()
+                                }).ToList();
+                return category;
             }
             catch (Exception ex)
             {
                 //To Do: Handle Exception
             }
 
-            return ds;
+            return null;
         }
         #endregion
     }
