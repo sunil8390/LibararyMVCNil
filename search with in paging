@@ -1,0 +1,67 @@
+USE [LaibraryDB]
+GO
+/****** Object:  StoredProcedure [dbo].[BookSearch]    Script Date: 04-02-2022 13:29:48 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[BookSearch]
+
+@BookName NVARCHAR(50) = NULL ,
+@CategoryId INT = NULL,
+@PublisherId INT =NULL,
+@PageNumber  INT ,
+@RowsOfPage INT
+
+
+AS
+BEGIN 
+--SET @PageNumber=2
+--SET @RowsOfPage=4
+
+SELECT   B.BookId, B.BookName, C.CategoryId,  C.CategoryName , P.PublisherId, P.PublisherName ,B.IsActive
+		FROM Books B  
+		left join Categories C
+		On B.CategoryId= C.CategoryId
+		left join Publishers P
+		on B.PublisherId= P.PublisherId 
+		WHERE (@BookName IS NULL OR BookName LIKE '%'+@BookName+ '%')AND
+				(@CategoryId IS NULL OR  c.CategoryId = @CategoryId)AND
+				(@PublisherId IS NULL OR p.PublisherId = @PublisherId)
+		ORDER BY BookId
+		OFFSET (@PageNumber-1)* @RowsOfPage ROWS
+		FETCH NEXT @RowsOfPage ROWS ONLY
+
+
+
+
+
+
+--SELECT BookId, BookName, CategoryId, PublisherId
+--FROM Books 
+--ORDER BY BookId
+--OFFSET (@PageNumber-1)* @RowsOfPage ROWS
+--FETCH NEXT @RowsOfPage ROWS ONLY
+
+--SET @PageNumber = @PageNumber + 1
+
+
+
+
+
+
+
+
+--SELECT   B.BookId, B.BookName, C.CategoryId,  C.CategoryName , P.PublisherId, P.PublisherName ,B.IsActive
+--		FROM Books B  
+--		left join Categories C
+--		On B.CategoryId= C.CategoryId
+--		left join Publishers P
+--		on B.PublisherId= P.PublisherId 
+--		WHERE (@BookName IS NULL OR BookName LIKE '%'+@BookName+ '%')AND
+--				(@CategoryId IS NULL OR  c.CategoryId = @CategoryId)AND
+--				(@PublisherId IS NULL OR p.PublisherId = @PublisherId)
+
+
+
+END;
