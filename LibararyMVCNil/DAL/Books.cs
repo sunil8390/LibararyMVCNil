@@ -405,7 +405,7 @@ namespace LibararyMVCNil.DAL
         /// </summary>
         /// <returns>DataSet of result</returns>
         /// <remarks></remarks>
-        public List<BooksViewModel> GetList( )
+        public List<BooksViewModel> GetList()
          {
            
             DataSet ds = null;

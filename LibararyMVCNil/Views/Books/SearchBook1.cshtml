@@ -18,14 +18,16 @@
 
         <style>
             .main {
-                margin: 20px;
-                border: 2px solid black;
-                padding: 14px;
+              
+                display:flex;
+                margin: 4rem;
+               
+              
             }
 
 
-            .main_sub {
-                margin-right: 40px;
+            .sub_main {
+                padding-right: 40px;
             }
 
             h1 {
@@ -39,103 +41,88 @@
     </head>
     <body>
        
-            <div class="col-lg-12"><h1> Search library Books</h1> </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        @using (Html.BeginForm("SearchBook1", "Books", FormMethod.Post))
-                        {
+        <div class="col-lg-12"><h1> Search library Books</h1> </div>
+           
+                 
+                    @using (Html.BeginForm("SearchBook1", "Books", FormMethod.Post))
+                      {
+                      
+                       <form>
+                           <div class="main">
+                               <div class="sub_main">
+                                   <label>Book Name</label>
+                                   @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
 
-                        <form class="main">
-                            <br />
-                            <div class="main_sub">
-                                <label>Book Name</label>
-                                @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
+                               </div>
 
-                            </div>
-                            <div class="main_sub">
-                                <label>Category Type</label>
-                                @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control" })
-                            </div>
-                            <div class="main_sub">
-                                <label>Publihser Name</label>
-                                @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
-                            </div> <br />
+                               <div class="sub_main">
+                                   <label>Category Type</label>
+                                   @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control" })
 
-                            <div class="main_sub">
-                                <label>PageNumber</label>
-                                @Html.TextBoxFor(model => model.PageNumber, new { @class = "form-control" })
+                               </div>
+                               <div class="sub_main">
+                                   <label>Publihser Name</label>
+                                   @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
 
-                            </div>
+                               </div>
 
 
-                            <div class="main_sub">
-                                <label>RowsOfPage</label>
-                                @Html.TextBoxFor(model => model.RowsOfPage, new { @class = "form-control" })
+                               <div class="sub_main">
+                                   <label>PageNumber</label>
+                                   @Html.TextBoxFor(model => model.PageNumber, new { @class = "form-control" })
 
-                            </div>
-                            @*<button type="submit" class="btn btn-outline-success">Search</button>
-        <button type="reset" class="btn btn-outline-info">Reset</button>*@
+                               </div>
+                               <div class="sub_main">
+                                   <label>RowsOfPage</label>
+                                   @Html.TextBoxFor(model => model.RowsOfPage, new { @class = "form-control" })
 
-                            @*<input type="submit" value="Search" name="search" class="btn btn-outline-success"/>
-        <input type="submit" value="Reset" name="reset" class="btn btn-outline-info"  />*@
+                               </div>
 
 
-                            @*@Html.TextBox("Searching")*@
-                            <input type="submit" name="name" value="Search" class="btn btn-outline-success" />
 
-                            <input type="reset" value="Reset" class="btn btn-outline-info" id="btnClear" />
+                               <div class="sub_main">
+
+                                   <input type="submit" name="name" value="Search" class="btn btn-outline-success"  style="margin-top:24px"/>
+                               </div>
+                               <div class="sub_main">
+
+                                   <input type="reset" value="Reset" class="btn btn-outline-info"   style="margin-top:24px"/>
+
+                               </div>
+                           </div>
                         </form>
-                        }
+                     }
 
-
-                        </div>
-                    <div class="col-12">
-
+                  
                        
-                            <table class="table table-hover">
-                                <tr>
-                                    <th>BookId</th>
-                                    <th>Book Name</th>
-                                    <th>Category Name</th>
-                                    <th>Publisher Name</th>
-                                </tr>
+   
+    <div class="container-fluid">
+        <table class="table table-hover">
+            <tr>
+                <th>BookId</th>
+                <th>Book Name</th>
+                <th>Category Name</th>
+                <th>Publisher Name</th>
+            </tr>
 
-                                @foreach (var a in Model.booklist)
-                                {
+            @foreach (var a in Model.booklist)
+            {
 
-                            <tr>
-                                <td>@Html.DisplayFor(modelitem => a.BookId) </td>
+                <tr>
+                    <td>@Html.DisplayFor(modelitem => a.BookId) </td>
 
-                                <td>@Html.DisplayFor(modelitem => a.BookName) </td>
-                                <td>@Html.DisplayFor(modelitem => a.CategoryName) </td>
-                                <td>@Html.DisplayFor(modelitem => a.PublisherName) </td>
-
-
-
-
-                            </tr>
+                    <td>@Html.DisplayFor(modelitem => a.BookName) </td>
+                    <td>@Html.DisplayFor(modelitem => a.CategoryName) </td>
+                    <td>@Html.DisplayFor(modelitem => a.PublisherName) </td>
 
 
 
 
+                </tr>
+            }
 
+        </table>
 
-                                }
-
-
-
-
-                               
-
-
-
-                            </table>
-
-                        
-                    </div>
-                </div>
-            </div>
-       
+    </div>
     </body>
 </html>
