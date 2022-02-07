@@ -82,7 +82,11 @@ namespace LibararyMVCNil.ViewModel
             get; set;
         }
 
-      
+        public List<int> PageRange
+
+        {
+            get; set;
+        }
 
 
 

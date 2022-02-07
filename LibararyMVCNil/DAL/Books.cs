@@ -167,9 +167,20 @@ namespace LibararyMVCNil.DAL
         {
             get; set;
         }
+
+        public List<int> PageSizeList 
+        
+        {
+            get; set; 
+        }
+
+
+
         #endregion
 
         #region Actions
+
+
 
         /// <summary>
         /// Loads the details for Books.
@@ -485,6 +496,9 @@ namespace LibararyMVCNil.DAL
             return null ;
             //return ds;
         }
+
+
+
 
 
         #endregion

@@ -74,8 +74,19 @@
                                </div>
                                <div class="sub_main">
                                    <label>RowsOfPage</label>
-                                   @Html.TextBoxFor(model => model.RowsOfPage, new { @class = "form-control" })
+                                   @*@Html.TextBoxFor(model => model.RowsOfPage, new { @class = "form-control" })*@
+                                   @*@Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.),  new { @class = "form-control" })*@
 
+                                   @*@Html.DropDownList("Status", new List<SelectListItem>
+
+                                          {
+                                             new SelectListItem{ Text="3", Value = "3" },
+                                             new SelectListItem{ Text="5", Value = "5" },
+                                             new SelectListItem{ Text="10", Value = "10" }
+                                          })*@
+
+
+                                   @Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.PageRange), " Please Select Page Range",  new { @class = "form-control" })
                                </div>
 
 

@@ -146,17 +146,27 @@ namespace LibararyMVCNil.Controllers
 
         public ActionResult SearchBook1() //using model serach book catgeories and publisher 
 
-         {
+        {
             BooksViewModel model =new BooksViewModel();
            
             Books Books = new Books();
+            model.PageNumber = 1;
+            model.RowsOfPage = 10;
+
+            Books.PageNumber = model.PageNumber;
+            Books.RowsOfPage = model.RowsOfPage;
+
             model.booklist = Books.GetList();
 
-            model.PageNumber = model.PageNumber;
-            model.RowsOfPage = model.RowsOfPage;
+          
 
 
-
+            model.PageRange = new List<int>() 
+            { 
+                3, 
+                5, 
+                10 
+            };
 
 
             //var book = (from DataRow dr in ds_bk.Tables[0].Rows
@@ -237,6 +247,13 @@ namespace LibararyMVCNil.Controllers
             db.PageNumber = Model.PageNumber;
             db.RowsOfPage = Model.RowsOfPage;
 
+            Model.PageRange = new List<int>()
+            { 
+                3, 
+                5, 
+                10 
+            };
+
 
             //Model.PageNumber = Model.PageNumber;
             //Model.RowsOfPage = Model.RowsOfPage;
@@ -252,7 +269,7 @@ namespace LibararyMVCNil.Controllers
             //DataSet ds_bk = Publisher.GetList();
             Model.booklist = db.GetList();  //a;
 
-
+            
 
             //var book = (from DataRow dr in ds_bk.Tables[0].Rows
             //                 select new BooksViewModel()
@@ -266,9 +283,9 @@ namespace LibararyMVCNil.Controllers
 
             //                 }).ToList();
 
-            
 
-    //categories
+
+            //categories
             Categories categories = new Categories();
             //DataSet ds_cat = Publisher.GetList();
             Model.categorylist = categories.GetList();
