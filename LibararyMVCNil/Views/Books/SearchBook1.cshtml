@@ -50,7 +50,7 @@
                             <br />
                             <div class="main_sub">
                                 <label>Book Name</label>
-                                @Html.TextBoxFor(model => model.BookName, new {  @class = "form-control" })
+                                @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
 
                             </div>
                             <div class="main_sub">
@@ -61,6 +61,19 @@
                                 <label>Publihser Name</label>
                                 @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
                             </div> <br />
+
+                            <div class="main_sub">
+                                <label>PageNumber</label>
+                                @Html.TextBoxFor(model => model.PageNumber, new { @class = "form-control" })
+
+                            </div>
+
+
+                            <div class="main_sub">
+                                <label>RowsOfPage</label>
+                                @Html.TextBoxFor(model => model.RowsOfPage, new { @class = "form-control" })
+
+                            </div>
                             @*<button type="submit" class="btn btn-outline-success">Search</button>
         <button type="reset" class="btn btn-outline-info">Reset</button>*@
 
@@ -90,15 +103,25 @@
                                 @foreach (var a in Model.booklist)
                                 {
 
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelitem => a.BookName) </td>
-                                        <td>@Html.DisplayFor(modelitem => a.CategoryName) </td>
-                                        <td>@Html.DisplayFor(modelitem => a.PublisherName) </td>
-                                    </tr>
+                            <tr>
+                                <td>@Html.DisplayFor(modelitem => a.BookName) </td>
+                                <td>@Html.DisplayFor(modelitem => a.CategoryName) </td>
+                                <td>@Html.DisplayFor(modelitem => a.PublisherName) </td>
+                                   
+
+                               
+
+                            </tr>
+
+
+
 
 
 
                                 }
+
+
+
 
                                
 

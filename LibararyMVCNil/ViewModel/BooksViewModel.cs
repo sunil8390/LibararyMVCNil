@@ -72,7 +72,17 @@ namespace LibararyMVCNil.ViewModel
             get; set;
         }
 
-       
+
+        public int PageNumber
+        {
+            get; set;
+        }
+        public int RowsOfPage
+        {
+            get; set;
+        }
+
+
 
         public int Quantity
         {

@@ -151,6 +151,8 @@ namespace LibararyMVCNil.Controllers
            
             Books Books = new Books();
             model.booklist = Books.GetList();
+            model.PageNumber = model.PageNumber;
+            model.RowsOfPage = model.RowsOfPage;
 
             //var book = (from DataRow dr in ds_bk.Tables[0].Rows
             //                select new BooksViewModel()
@@ -169,8 +171,8 @@ namespace LibararyMVCNil.Controllers
 
 
 
-     //categories
-           // DataSet cds = db.GetList();
+            //categories
+            // DataSet cds = db.GetList();
             Categories categories = new Categories();
             model.categorylist = categories.GetList();
 
@@ -245,6 +247,15 @@ namespace LibararyMVCNil.Controllers
             db.BookName = Model.BookName;
             db.CategoryId = Model.CategoryId;
             db.PublisherId = Model.PublisherId;
+
+
+            db.PageNumber = Model.PageNumber;
+            db.RowsOfPage = Model.RowsOfPage;
+
+
+            //Model.PageNumber = Model.PageNumber;
+            //Model.RowsOfPage = Model.RowsOfPage;
+
             //db.CategoryName = Model.CategoryName;
             //db.PublisherName = Model.PublisherName;
 
@@ -300,6 +311,8 @@ namespace LibararyMVCNil.Controllers
             //                  }).ToList();
             //Model.publisherlist = Publishers;
 
+
+            
 
 
             return View(Model);

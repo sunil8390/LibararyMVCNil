@@ -158,6 +158,15 @@ namespace LibararyMVCNil.DAL
         {
             get; set;
         }
+
+        public int PageNumber
+        {
+            get; set;
+        }
+        public int RowsOfPage
+        {
+            get; set;
+        }
         #endregion
 
         #region Actions
@@ -396,7 +405,7 @@ namespace LibararyMVCNil.DAL
         /// </summary>
         /// <returns>DataSet of result</returns>
         /// <remarks></remarks>
-        public List<BooksViewModel> GetList()
+        public List<BooksViewModel> GetList( )
          {
            
             DataSet ds = null;
@@ -430,6 +439,26 @@ namespace LibararyMVCNil.DAL
                 {
                     this.db.AddInParameter(com, "PublisherId", DbType.Int32, DBNull.Value);
                 }
+
+
+                if (this.PageNumber > 0)
+                {
+                    this.db.AddInParameter(com, "PageNumber", DbType.Int32, this.PageNumber);
+                }
+                else
+                {
+                    this.db.AddInParameter(com, "PageNumber", DbType.Int32, DBNull.Value);
+                }
+
+                if (this.RowsOfPage > 0)
+                {
+                    this.db.AddInParameter(com, "RowsOfPage", DbType.Int32, this.RowsOfPage);
+                }
+                else
+                {
+                    this.db.AddInParameter(com, "RowsOfPage", DbType.Int32, DBNull.Value);
+                }
+
                 ds = db.ExecuteDataSet(com);
                 var book = (from DataRow dr in ds.Tables[0].Rows
                             select new BooksViewModel()
@@ -454,6 +483,7 @@ namespace LibararyMVCNil.DAL
             }
 
             return null ;
+            //return ds;
         }
 
 
