@@ -95,21 +95,24 @@
                        
                             <table class="table table-hover">
                                 <tr>
+                                    <th>BookId</th>
                                     <th>Book Name</th>
-                                    <th>Category Name </th>
-                                    <th>Publisher Name </th>
+                                    <th>Category Name</th>
+                                    <th>Publisher Name</th>
                                 </tr>
 
                                 @foreach (var a in Model.booklist)
                                 {
 
                             <tr>
+                                <td>@Html.DisplayFor(modelitem => a.BookId) </td>
+
                                 <td>@Html.DisplayFor(modelitem => a.BookName) </td>
                                 <td>@Html.DisplayFor(modelitem => a.CategoryName) </td>
                                 <td>@Html.DisplayFor(modelitem => a.PublisherName) </td>
-                                   
 
-                               
+
+
 
                             </tr>
 

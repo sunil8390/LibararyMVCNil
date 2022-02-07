@@ -151,8 +151,13 @@ namespace LibararyMVCNil.Controllers
            
             Books Books = new Books();
             model.booklist = Books.GetList();
+
             model.PageNumber = model.PageNumber;
             model.RowsOfPage = model.RowsOfPage;
+
+
+
+
 
             //var book = (from DataRow dr in ds_bk.Tables[0].Rows
             //                select new BooksViewModel()
@@ -213,27 +218,7 @@ namespace LibararyMVCNil.Controllers
         [HttpPost]
         public ActionResult SearchBook1(BooksViewModel Model) /* string Searching*/
         {
-            //BooksViewModel model = new BooksViewModel();
-            //var bks = from s in model.BookName select s;
-            //if (!string.IsNullOrEmpty(BookName))
-            //{
-            //    bks = bks.Where(s => s..Contains(BookName));
-            //}
-            //return View(bks.ToList());
-
-
-
-            //BooksViewModel model = new BooksViewModel();
-            //var book = from c in model.BookName where 
-
-
-
-            //if(ModelState.IsValid)
-            //{
-            //    return View(categories);
-
-            //}
-
+           
 
             //BooksViewModel model = new BooksViewModel();
             //Categories db = new Categories();
@@ -266,6 +251,7 @@ namespace LibararyMVCNil.Controllers
             //  Books Books = new Books();
             //DataSet ds_bk = Publisher.GetList();
             Model.booklist = db.GetList();  //a;
+
 
 
             //var book = (from DataRow dr in ds_bk.Tables[0].Rows

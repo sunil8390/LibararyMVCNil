@@ -82,6 +82,8 @@ namespace LibararyMVCNil.ViewModel
             get; set;
         }
 
+      
+
 
 
         public int Quantity
