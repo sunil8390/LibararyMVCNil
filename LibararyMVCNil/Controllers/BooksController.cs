@@ -156,7 +156,7 @@ namespace LibararyMVCNil.Controllers
             Books.PageNumber = model.PageNumber;
             Books.RowsOfPage = model.RowsOfPage;
 
-            model.booklist = Books.GetList();
+            model.booklist = Books.GetList(model);
 
           
 
@@ -168,84 +168,45 @@ namespace LibararyMVCNil.Controllers
                 10 
             };
 
-
-            //var book = (from DataRow dr in ds_bk.Tables[0].Rows
-            //                select new BooksViewModel()
-            //                {
-            //                    BookId = Convert.ToInt32(dr["BookId"]),
-            //                    BookName = dr["BookName"].ToString(),
-            //                   CategoryId = Convert.ToInt32(dr["CategoryId"]),
-            //                    CategoryName = dr["CategoryName"].ToString(), 
-            //                    PublisherId = Convert.ToInt32(dr["PublisherId"]),
-            //                    PublisherName = dr["PublisherName"].ToString()
-
-            //                }).ToList();
-            //var book = db.DataConversion();
-
-            //model.booklist = book;
+            //Books bkc = new Books();    
+            //var user = bkc.BookId.ToString().Count();
+            //Model.TotalPages = user/ Model.RowsOfPage;
 
 
 
-            //categories
-            // DataSet cds = db.GetList();
+            //Categories
+
             Categories categories = new Categories();
             model.categorylist = categories.GetList();
 
-            //var category = (from DataRow dr in ds_cat.Tables[0].Rows
-            //                select new Categories()
-            //                {
-            //                    CategoryId = Convert.ToInt32(dr["CategoryId"]),
-            //                    CategoryName = dr["CategoryName"].ToString()
-            //                }).ToList();
 
-            //model.categorylist = category;
+        //Publishers
 
-
-
-
-      //Publishers
-
-            ///DataSet pds = db.GetList();
+            
             Publishers Publisher = new Publishers();
-            //DataSet ds_pub = Publisher.GetList();
+           
             model.publisherlist = Publisher.GetList();
 
-            //var Publishers = (from DataRow dr in ds_pub.Tables[0].Rows
-            //                  select new Publishers()
-            //                  {
-            //                      PublisherId = Convert.ToInt32(dr["PublisherId"]),
-            //                      PublisherName = dr["PublisherName"].ToString()
-            //                  }).ToList();
-            //model.publisherlist = Publishers;
-
-
+          
             return View(model);
 
            
         }
 
-    
+    //Post
         [HttpPost]
         public ActionResult SearchBook1(BooksViewModel Model) /* string Searching*/
         {
            
-
-            //BooksViewModel model = new BooksViewModel();
-            //Categories db = new Categories();
-            //DataSet pds = db.GetList();
-            //var category = category.Include(s => )
-
-
-
-
             Books db = new Books();
-            db.BookName = Model.BookName;
-            db.CategoryId = Model.CategoryId;
-            db.PublisherId = Model.PublisherId;
+            //db.BookId = Model.BookId;
+            //db.BookName = Model.BookName;
+            //db.CategoryId = Model.CategoryId;
+            //db.PublisherId = Model.PublisherId;
 
 
-            db.PageNumber = Model.PageNumber;
-            db.RowsOfPage = Model.RowsOfPage;
+            //db.PageNumber = Model.PageNumber;
+            //db.RowsOfPage = Model.RowsOfPage;
 
             Model.PageRange = new List<int>()
             { 
@@ -255,67 +216,63 @@ namespace LibararyMVCNil.Controllers
             };
 
 
-            //Model.PageNumber = Model.PageNumber;
-            //Model.RowsOfPage = Model.RowsOfPage;
+       
 
-            //db.CategoryName = Model.CategoryName;
-            //db.PublisherName = Model.PublisherName;
+            Model.booklist = db.GetList(Model);
 
 
-            // var a = db.GetList();
-
-            //book
-            //  Books Books = new Books();
-            //DataSet ds_bk = Publisher.GetList();
-            Model.booklist = db.GetList();  //a;
-
-            
-
-            //var book = (from DataRow dr in ds_bk.Tables[0].Rows
-            //                 select new BooksViewModel()
-            //                 {
-            //                     BookId = Convert.ToInt32(dr["BookId"]),
-            //                     BookName = dr["BookName"].ToString(),
-            //                     CategoryId = Convert.ToInt32(dr["CategoryId"]),
-            //                     CategoryName = dr["CategoryName"].ToString(), 
-            //                     PublisherId = Convert.ToInt32(dr["PublisherId"]),
-            //                     PublisherName = dr["PublisherName"].ToString()
-
-            //                 }).ToList();
-
-
+           
 
             //categories
             Categories categories = new Categories();
-            //DataSet ds_cat = Publisher.GetList();
+         
             Model.categorylist = categories.GetList();
-
-            //var category = (from DataRow dr in ds_cat.Tables[0].Rows
-            //                select new Categories()
-            //                {
-            //                    CategoryId = Convert.ToInt32(dr["CategoryId"]),
-            //                    CategoryName = dr["CategoryName"].ToString()
-            //                }).ToList();
-
-            //Model.categorylist = category;
-
 
 
     //Publishers
             Publishers Publisher = new Publishers();
-            //DataSet ds_pub = Publisher.GetList();
+            
             Model.publisherlist = Publisher.GetList();
 
-            //var Publishers = (from DataRow dr in ds.Tables[0].Rows
-            //                  select new Publishers()
-            //                  {
-            //                      PublisherId = Convert.ToInt32(dr["PublisherId"]),
-            //                      PublisherName = dr["PublisherName"].ToString()
-            //                  }).ToList();
-            //Model.publisherlist = Publishers;
 
 
-            
+
+            //pagination 
+
+            //var bkcount = 
+            //Model.RowsOfPage = 5;
+            //for (int i = 1; i <=Model.BookId.ToString().Count(); i++)
+            //{
+            //  Model.TotalPages= i/ Model.RowsOfPage;
+
+
+            //}
+
+            //for (int i = 0; i<=Model.BookId; i++)
+            //{
+            //    int Total = Model.BookId.ToString().Count();
+
+            //}
+
+            //int booklistfull = Model.BookId.ToString().Count();
+
+
+
+
+          //  Model.TotalPages = 10 / Model.RowsOfPage;  //count
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             return View(Model);

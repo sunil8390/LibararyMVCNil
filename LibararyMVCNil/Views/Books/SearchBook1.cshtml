@@ -130,7 +130,20 @@
 
 
                 </tr>
+
+
             }
+
+            @for (int i = 1; i <= Model.TotalPages; i++)
+
+            {
+                <ul>
+                    <li>@Html.ActionLink(@i.ToString(), "SearchBook1", "Books", new { page = @i }, null)</li>
+                </ul>
+
+            }
+
+
 
         </table>
 

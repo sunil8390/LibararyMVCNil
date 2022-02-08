@@ -168,11 +168,28 @@ namespace LibararyMVCNil.DAL
             get; set;
         }
 
+        
+
+       public int RowCounts
+        {
+            get; set;
+        }
+
+
         public List<int> PageSizeList 
         
         {
             get; set; 
         }
+
+        //public int TotalPages
+        //{
+        //    get; set;
+        //}
+
+
+
+
 
 
 
@@ -416,7 +433,7 @@ namespace LibararyMVCNil.DAL
         /// </summary>
         /// <returns>DataSet of result</returns>
         /// <remarks></remarks>
-        public List<BooksViewModel> GetList()
+        public List<BooksViewModel> GetList(BooksViewModel Model)
          {
            
             DataSet ds = null;
@@ -426,25 +443,25 @@ namespace LibararyMVCNil.DAL
 
 
                 DbCommand com = db.GetStoredProcCommand("BooksGetList");
-                if (!String.IsNullOrEmpty(this.BookName))
+                if (!String.IsNullOrEmpty(Model.BookName))
                 {
-                    this.db.AddInParameter(com, "BookName", DbType.String, this.BookName);
+                    this.db.AddInParameter(com, "BookName", DbType.String, Model.BookName);
                 }
                 else
                 {
                     this.db.AddInParameter(com, "BookName", DbType.String, DBNull.Value);
                 }
-                if (this.CategoryId > 0)
+                if (Model.CategoryId > 0)
                 {
-                    this.db.AddInParameter(com, "CategoryId", DbType.Int32, this.CategoryId);
+                    this.db.AddInParameter(com, "CategoryId", DbType.Int32, Model.CategoryId);
                 }
                 else
                 {
                     this.db.AddInParameter(com, "CategoryId", DbType.Int32, DBNull.Value);
                 }
-                if (this.PublisherId > 0)
+                if (Model.PublisherId > 0)
                 {
-                    this.db.AddInParameter(com, "PublisherId", DbType.Int32, this.PublisherId);
+                    this.db.AddInParameter(com, "PublisherId", DbType.Int32, Model.PublisherId);
                 }
                 else
                 {
@@ -452,25 +469,42 @@ namespace LibararyMVCNil.DAL
                 }
 
 
-                if (this.PageNumber > 0)
+                if (Model.PageNumber > 0)
                 {
-                    this.db.AddInParameter(com, "PageNumber", DbType.Int32, this.PageNumber);
+                    this.db.AddInParameter(com, "PageNumber", DbType.Int32, Model.PageNumber);
                 }
                 else
                 {
                     this.db.AddInParameter(com, "PageNumber", DbType.Int32, DBNull.Value);
                 }
 
-                if (this.RowsOfPage > 0)
+                if (Model.RowsOfPage > 0)
                 {
-                    this.db.AddInParameter(com, "RowsOfPage", DbType.Int32, this.RowsOfPage);
+                    this.db.AddInParameter(com, "RowsOfPage", DbType.Int32, Model.RowsOfPage);
                 }
                 else
                 {
                     this.db.AddInParameter(com, "RowsOfPage", DbType.Int32, DBNull.Value);
                 }
 
+
+                //if (Model.TotalRecords > 0)
+                //{
+                //    this.db.AddInParameter(com, "RowsOfPage", DbType.Int32, Model.TotalRecords);
+                //}
+                //else
+                //{
+                //    this.db.AddInParameter(com, "RowsOfPage", DbType.Int32, DBNull.Value);
+                //}
+
+
+
+
                 ds = db.ExecuteDataSet(com);
+
+               
+
+
                 var book = (from DataRow dr in ds.Tables[0].Rows
                             select new BooksViewModel()
                             {
@@ -482,6 +516,13 @@ namespace LibararyMVCNil.DAL
                                 PublisherName = dr["PublisherName"].ToString()
 
                             }).ToList();
+
+              
+                Model.RowCounts = Convert.ToInt32 ( ds.Tables[0].Rows[0]["TotalRecords"].ToString()) ;  
+
+                //models.RowCounts = ds.Tables[0].Rows.Count;
+                Model.TotalPages = Model.RowCounts / Model.RowsOfPage;
+
 
                 return book;
 
@@ -502,5 +543,8 @@ namespace LibararyMVCNil.DAL
 
 
         #endregion
+
+
+      
     }
 }

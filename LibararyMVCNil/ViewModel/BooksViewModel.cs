@@ -15,13 +15,14 @@ namespace LibararyMVCNil.ViewModel
 {
     public class BooksViewModel
     {
+       
 
-        
+
 
 
         #region Properties
 
-       
+
         public int BookId
         {
             get; set;
@@ -62,6 +63,11 @@ namespace LibararyMVCNil.ViewModel
             get; set;
         }
 
+        public int booklistfull
+        {
+            get; set;
+        }
+
 
         public List<Categories> categorylist
         {
@@ -88,6 +94,9 @@ namespace LibararyMVCNil.ViewModel
             get; set;
         }
 
+       
+
+       
 
 
         public int Quantity
@@ -124,6 +133,21 @@ namespace LibararyMVCNil.ViewModel
         {
             get; set;
         }
+
+        public int TotalPages
+        {
+            get; set;
+        }
+
+        public int RowCounts
+        
+        { 
+            get;  set;
+        }
+        public int TotalRecords { get;  set; }
+
+
+
         #endregion
 
     }
