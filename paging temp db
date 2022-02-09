@@ -1,0 +1,73 @@
+USE [LaibraryDB]
+GO
+/****** Object:  StoredProcedure [dbo].[BooksGetList]    Script Date: 09-02-2022 11:33:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+	ALTER PROCEDURE [dbo].[BooksGetList]
+
+	@BookName NVARCHAR(50) = NULL ,
+	@CategoryId INT = NULL,
+	@PublisherId INT =NULL,
+	@PageNumber  INT =NULL,
+	@RowsOfPage INT = NULL 
+	--@RowCounts int = 0
+	
+	AS
+	/*
+	[BooksGetList] null, null, null, 1, 4
+	[BooksGetList] null, 'abc', null
+	[BooksGetList] null, 'abc', 'pqr'
+	[BooksGetList] 'c', 5 , 5
+
+	*/
+	BEGIN
+
+	DECLARE @TotalRecords INT = 0
+	--paging wies search
+
+	SELECT BookId, B.BookName, C.CategoryName, P.PublisherName, B.CategoryId, B.PublisherId, B.Quantity, B.IsActive, B.CreatedBy, B.CreatedOn, B.ModifiedBy,B.ModifiedOn,
+ Row_number() OVER(ORDER BY BookId) AS Rownumber
+ INTO #TempBookDetails
+ FROM Books B  
+		left join Categories C
+		On B.CategoryId= C.CategoryId
+		left join Publishers P
+		on B.PublisherId= P.PublisherId 
+		WHERE (@BookName IS NULL OR BookName LIKE '%'+@BookName+ '%')AND
+				(@CategoryId IS NULL OR  c.CategoryId = @CategoryId)AND
+				(@PublisherId IS NULL OR p.PublisherId = @PublisherId)
+
+		ORDER BY B.BookId
+
+		SELECT @TotalRecords = count(BookId)
+		FROM #TempBookDetails
+		
+
+		SELECT *, @TotalRecords as TotalRecords FROM #TempBookDetails 
+		WHERE Rownumber BETWEEN  ( @PageNumber - 1 ) * @RowsOfPage + 1 AND
+		@PageNumber * @RowsOfPage
+
+		DROP TABLE #TempBookDetails
+
+
+
+
+
+
+
+
+	 --book serch only 
+		--SELECT   B.BookId, B.BookName, C.CategoryId,  C.CategoryName , P.PublisherId, P.PublisherName ,B.IsActive
+		--FROM Books B  
+		--left join Categories C
+		--On B.CategoryId= C.CategoryId
+		--left join Publishers P
+		--on B.PublisherId= P.PublisherId 
+		--WHERE (@BookName IS NULL OR BookName LIKE '%'+@BookName+ '%')AND
+		--		(@CategoryId IS NULL OR  c.CategoryId = @CategoryId)AND
+		--		(@PublisherId IS NULL OR p.PublisherId = @PublisherId)
+				
+
+	END
