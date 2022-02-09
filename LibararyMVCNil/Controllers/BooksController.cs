@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 
 
 
@@ -144,18 +145,20 @@ namespace LibararyMVCNil.Controllers
 
         //}
 
-        public ActionResult SearchBook1( int pager = 1 ) //using model serach book catgeories and publisher 
+        public ActionResult SearchBook1() // int pager = 1  for paging //using model serach book catgeories and publisher 
 
         {
             BooksViewModel model =new BooksViewModel();
            
             Books Books = new Books();
 
-            model.PageNumber = pager;
-            model.RowsOfPage =3;
+            model.PageNumber = 1;
+            model.RowsOfPage =10;
 
-            //Books.PageNumber = model.PageNumber;
-            //Books.RowsOfPage = model.RowsOfPage;
+            //model.PageNumber = pager;   //For paging 
+            //model.RowsOfPage = 3;
+
+          
 
             model.booklist = Books.GetList(model);
 
@@ -236,6 +239,37 @@ namespace LibararyMVCNil.Controllers
 
 
         }
+
+
+        public JsonResult get_data()
+        {
+            //Books db = new Books();
+            //BooksViewModel Model = new BooksViewModel();
+            //Model.booklist = db.GetList(Model);
+
+            //return Json(Model.booklist, JsonRequestBehavior.AllowGet);
+
+            //BooksViewModel Model = new BooksViewModel();
+
+            Books book = new Books();
+            
+                //List<Books> books = new List<Books>().ToList();
+
+                Books Books = new Books();
+
+                BooksViewModel model = new BooksViewModel();
+                model.PageNumber = 1;
+                model.RowsOfPage = 10;
+                model.booklist = Books.GetList(model);
+            
+
+            var json = JsonConvert.SerializeObject(model.booklist);
+            return Json(json, JsonRequestBehavior.AllowGet);
+
+        
+            
+
+        }
        
 
 
@@ -246,13 +280,9 @@ namespace LibararyMVCNil.Controllers
 
 
 
+
             
-
-           
-
-
-                return View();
-
+            return View();  
 
 
         }//empty 
