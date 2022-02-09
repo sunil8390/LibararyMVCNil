@@ -441,7 +441,6 @@ namespace LibararyMVCNil.DAL
             try
             {
 
-
                 DbCommand com = db.GetStoredProcCommand("BooksGetList");
                 if (!String.IsNullOrEmpty(Model.BookName))
                 {
@@ -486,11 +485,6 @@ namespace LibararyMVCNil.DAL
                 {
                     this.db.AddInParameter(com, "RowsOfPage", DbType.Int32, DBNull.Value);
                 }
-
-
-                
-
-
 
 
                 ds = db.ExecuteDataSet(com);

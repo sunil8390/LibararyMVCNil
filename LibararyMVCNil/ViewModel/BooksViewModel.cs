@@ -94,10 +94,7 @@ namespace LibararyMVCNil.ViewModel
             get; set;
         }
 
-       
-
-       
-
+      
 
         public int Quantity
         {
@@ -144,7 +141,10 @@ namespace LibararyMVCNil.ViewModel
         { 
             get;  set;
         }
-        public int TotalRecords { get;  set; }
+        public int TotalRecords 
+        { 
+            get;  set;
+        }
 
 
 

@@ -157,12 +157,7 @@ namespace LibararyMVCNil.Controllers
             //Books.PageNumber = model.PageNumber;
             //Books.RowsOfPage = model.RowsOfPage;
 
-
-
             model.booklist = Books.GetList(model);
-
-
-
 
             model.PageRange = new List<int>()
             {
@@ -171,12 +166,7 @@ namespace LibararyMVCNil.Controllers
                 10
             };
 
-            //Books bkc = new Books();    
-            //var user = bkc.BookId.ToString().Count();
-            //Model.TotalPages = user/ Model.RowsOfPage;
-
-
-
+       
             //Categories
 
             Categories categories = new Categories();
@@ -238,43 +228,7 @@ namespace LibararyMVCNil.Controllers
             Model.publisherlist = Publisher.GetList();
 
 
-
-
-            //pagination 
-
-            //var bkcount = 
-            //Model.RowsOfPage = 5;
-            //for (int i = 1; i <=Model.BookId.ToString().Count(); i++)
-            //{
-            //  Model.TotalPages= i/ Model.RowsOfPage;
-
-
-            //}
-
-            //for (int i = 0; i<=Model.BookId; i++)
-            //{
-            //    int Total = Model.BookId.ToString().Count();
-
-            //}
-
-            //int booklistfull = Model.BookId.ToString().Count();
-
-
-
-
           //  Model.TotalPages = 10 / Model.RowsOfPage;  //count
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
