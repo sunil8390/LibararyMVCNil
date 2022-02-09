@@ -153,8 +153,8 @@ namespace LibararyMVCNil.Controllers
             model.PageNumber = 1;
             model.RowsOfPage = 10;
 
-            Books.PageNumber = model.PageNumber;
-            Books.RowsOfPage = model.RowsOfPage;
+            //Books.PageNumber = model.PageNumber;
+            //Books.RowsOfPage = model.RowsOfPage;
 
             model.booklist = Books.GetList(model);
 

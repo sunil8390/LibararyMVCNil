@@ -40,113 +40,120 @@
         </style>
     </head>
     <body>
-       
+
         <div class="col-lg-12"><h1> Search library Books</h1> </div>
-           
-                 
-                    @using (Html.BeginForm("SearchBook1", "Books", FormMethod.Post))
-                      {
-                      
-                       <form>
-                           <div class="main">
-                               <div class="sub_main">
-                                   <label>Book Name</label>
-                                   @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
-
-                               </div>
-
-                               <div class="sub_main">
-                                   <label>Category Type</label>
-                                   @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control" })
-
-                               </div>
-                               <div class="sub_main">
-                                   <label>Publihser Name</label>
-                                   @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
-
-                               </div>
 
 
-                               <div class="sub_main">
-                                   <label>PageNumber</label>
-                                   @Html.TextBoxFor(model => model.PageNumber, new { @class = "form-control" })
+        @using (Html.BeginForm("SearchBook1", "Books", FormMethod.Post))
+        {
 
-                               </div>
-                               <div class="sub_main">
-                                   <label>RowsOfPage</label>
-                                   @*@Html.TextBoxFor(model => model.RowsOfPage, new { @class = "form-control" })*@
-                                   @*@Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.),  new { @class = "form-control" })*@
+            <form>
+                <div class="main">
+                    <div class="sub_main">
+                        <label>Book Name</label>
+                        @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
 
-                                   @*@Html.DropDownList("Status", new List<SelectListItem>
+                    </div>
 
-                                          {
-                                             new SelectListItem{ Text="3", Value = "3" },
-                                             new SelectListItem{ Text="5", Value = "5" },
-                                             new SelectListItem{ Text="10", Value = "10" }
-                                          })*@
+                    <div class="sub_main">
+                        <label>Category Type</label>
+                        @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control" })
+
+                    </div>
+                    <div class="sub_main">
+                        <label>Publihser Name</label>
+                        @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
+
+                    </div>
 
 
-                                   @Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.PageRange), " Please Select Page Range",  new { @class = "form-control" })
-                               </div>
+                    <div class="sub_main">
+                        <label>PageNumber</label>
+                        @Html.TextBoxFor(model => model.PageNumber, new { @class = "form-control" })
+
+                    </div>
+                    <div class="sub_main">
+                        <label>RowsOfPage</label>
+                        @*@Html.TextBoxFor(model => model.RowsOfPage, new { @class = "form-control" })*@
+                        @*@Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.),  new { @class = "form-control" })*@
+
+                        @*@Html.DropDownList("Status", new List<SelectListItem>
+
+                        {
+                           new SelectListItem{ Text="3", Value = "3" },
+                           new SelectListItem{ Text="5", Value = "5" },
+                           new SelectListItem{ Text="10", Value = "10" }
+                        })*@
+
+
+                        @Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.PageRange), " Please Select Page Range", new { @class = "form-control" })
+                    </div>
 
 
 
-                               <div class="sub_main">
+                    <div class="sub_main">
 
-                                   <input type="submit" name="name" value="Search" class="btn btn-outline-success"  style="margin-top:24px"/>
-                               </div>
-                               <div class="sub_main">
+                        <input type="submit" name="name" value="Search" class="btn btn-outline-success" style="margin-top:24px" />
+                    </div>
+                    <div class="sub_main">
 
-                                   <input type="reset" value="Reset" class="btn btn-outline-info"   style="margin-top:24px"/>
+                        <input type="reset" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
 
-                               </div>
-                           </div>
-                        </form>
-                     }
+                    </div>
+                </div>
+            </form>
 
-                  
-                       
-   
-    <div class="container-fluid">
-        <table class="table table-hover">
-            <tr>
-                <th>BookId</th>
-                <th>Book Name</th>
-                <th>Category Name</th>
-                <th>Publisher Name</th>
-            </tr>
+            <div class="container-fluid">
+                <table class="table table-hover">
+                    <tr>
+                        <th>BookId</th>
+                        <th>Book Name</th>
+                        <th>Category Name</th>
+                        <th>Publisher Name</th>
+                    </tr>
 
-            @foreach (var a in Model.booklist)
-            {
+                    @foreach (var a in Model.booklist)
+                    {
 
-                <tr>
-                    <td>@Html.DisplayFor(modelitem => a.BookId) </td>
+                        <tr>
+                            <td>@Html.DisplayFor(modelitem => a.BookId) </td>
 
-                    <td>@Html.DisplayFor(modelitem => a.BookName) </td>
-                    <td>@Html.DisplayFor(modelitem => a.CategoryName) </td>
-                    <td>@Html.DisplayFor(modelitem => a.PublisherName) </td>
+                            <td>@Html.DisplayFor(modelitem => a.BookName) </td>
+                            <td>@Html.DisplayFor(modelitem => a.CategoryName) </td>
+                            <td>@Html.DisplayFor(modelitem => a.PublisherName) </td>
 
 
 
 
-                </tr>
+                        </tr>
 
 
-            }
-
-            @for (int i = 1; i <= Model.TotalPages; i++)
-
-            {
-                <ul>
-                    <li>@Html.ActionLink(@i.ToString(), "SearchBook1", "Books", new { page = @i }, null)</li>
-                </ul>
-
-            }
+                    }
 
 
 
-        </table>
 
-    </div>
+
+                </table>
+
+            </div>
+        }
+
+
+
+
+        @for (int i = 1; i <= Model.TotalPages; i++)
+
+        {
+            <ul>
+                <li>@Html.ActionLink(@i.ToString(), "SearchBook1", "Books", new { page = @i }, null)</li>
+            </ul>
+
+        }
+
+
+
+
+
     </body>
 </html>

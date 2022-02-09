@@ -488,14 +488,7 @@ namespace LibararyMVCNil.DAL
                 }
 
 
-                //if (Model.TotalRecords > 0)
-                //{
-                //    this.db.AddInParameter(com, "RowsOfPage", DbType.Int32, Model.TotalRecords);
-                //}
-                //else
-                //{
-                //    this.db.AddInParameter(com, "RowsOfPage", DbType.Int32, DBNull.Value);
-                //}
+                
 
 
 
