@@ -144,28 +144,31 @@ namespace LibararyMVCNil.Controllers
 
         //}
 
-        public ActionResult SearchBook1() //using model serach book catgeories and publisher 
+        public ActionResult SearchBook1( int pager = 1 ) //using model serach book catgeories and publisher 
 
         {
             BooksViewModel model =new BooksViewModel();
            
             Books Books = new Books();
-            model.PageNumber = 1;
-            model.RowsOfPage = 10;
+
+            model.PageNumber = pager;
+            model.RowsOfPage =3;
 
             //Books.PageNumber = model.PageNumber;
             //Books.RowsOfPage = model.RowsOfPage;
 
+
+
             model.booklist = Books.GetList(model);
 
-          
 
 
-            model.PageRange = new List<int>() 
-            { 
-                3, 
-                5, 
-                10 
+
+            model.PageRange = new List<int>()
+            {
+                3,
+                5,
+                10
             };
 
             //Books bkc = new Books();    
@@ -209,14 +212,14 @@ namespace LibararyMVCNil.Controllers
             //db.RowsOfPage = Model.RowsOfPage;
 
             Model.PageRange = new List<int>()
-            { 
-                3, 
-                5, 
-                10 
+            {
+                3,
+                5,
+                10
             };
 
 
-       
+
 
             Model.booklist = db.GetList(Model);
 

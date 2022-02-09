@@ -142,18 +142,33 @@
 
 
 
-        @for (int i = 1; i <= Model.TotalPages; i++)
+        @*@for (int i = 1; i <= Model.TotalPages; i++)
 
         {
             <ul>
-                <li>@Html.ActionLink(@i.ToString(), "SearchBook1", "Books", new { page = @i }, null)</li>
+                <li>@Html.ActionLink(@i.ToString(), "SearchBook1", "Books", new { page = @i } )</li>
             </ul>
+
+
+        }*@
+
+
+    <div class="container-fluid">
+
+        @for (int a = 1; a < Convert.ToInt32(Model.TotalPages) + 1; a++)
+        {
+            <a href="@Url.Action("SearchBook1", "Books",new { pager=a   })">@a.ToString()</a>
+
 
         }
 
 
+    </div>
+       
+          
 
 
+        
 
     </body>
 </html>

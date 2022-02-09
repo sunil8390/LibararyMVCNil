@@ -514,7 +514,7 @@ namespace LibararyMVCNil.DAL
                 Model.RowCounts = Convert.ToInt32 ( ds.Tables[0].Rows[0]["TotalRecords"].ToString()) ;  
 
                 //models.RowCounts = ds.Tables[0].Rows.Count;
-                Model.TotalPages = Model.RowCounts / Model.RowsOfPage;
+                Model.TotalPages = (int)Math.Ceiling((double)Model.RowCounts / Model.RowsOfPage);
 
 
                 return book;
