@@ -241,36 +241,55 @@ namespace LibararyMVCNil.Controllers
         }
 
 
-        public JsonResult get_data()
+        public JsonResult get_data(BooksViewModel model)
         {
-            //Books db = new Books();
-            //BooksViewModel Model = new BooksViewModel();
-            //Model.booklist = db.GetList(Model);
-
-            //return Json(Model.booklist, JsonRequestBehavior.AllowGet);
-
-            //BooksViewModel Model = new BooksViewModel();
-
-            Books book = new Books();
             
-                //List<Books> books = new List<Books>().ToList();
 
+           
+   
                 Books Books = new Books();
 
-                BooksViewModel model = new BooksViewModel();
-                model.PageNumber = 1;
-                model.RowsOfPage = 10;
-                model.booklist = Books.GetList(model);
-            
+                //BooksViewModel model = new BooksViewModel();
 
-            var json = JsonConvert.SerializeObject(model.booklist);
-            return Json(json, JsonRequestBehavior.AllowGet);
+                //model.BookName = BookName;
+                //model.CategoryId = CategoryId;
+                //model.PublisherId = PublisherId;
+                //model.PageNumber = PageNumber;
+                //model.RowsOfPage = RowsOfPage;
+               
 
-        
-            
+
+             
+
+
+            model.booklist = Books.GetList(model);
+
+           // var json = JsonConvert.SerializeObject(model.booklist);
+            return Json(model.booklist, JsonRequestBehavior.AllowGet);
+
 
         }
-       
+
+
+        //[HttpPost]
+        //public JsonResult get_data(int pageNumber = 1, int rowsOfPage = 3)
+        //{
+        //    Books Books = new Books();
+        //    BooksViewModel model = new BooksViewModel();
+        //    model.PageNumber = pageNumber;
+        //    model.RowsOfPage = rowsOfPage;
+
+
+        //    model.booklist = Books.GetList(model);
+
+
+
+        //    var json = JsonConvert.SerializeObject(model.booklist);
+        //    return Json(json, JsonRequestBehavior.AllowGet);
+
+        //}
+
+
 
 
         public ActionResult SearchBook2( )

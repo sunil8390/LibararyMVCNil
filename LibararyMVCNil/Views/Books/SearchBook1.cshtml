@@ -41,15 +41,15 @@
 
         <div class="col-lg-12"><h1> Search library Books</h1> </div>
 
-
-        @using (Html.BeginForm("SearchBook1", "Books", FormMethod.Post))
+        @*@using (Html.BeginForm("SearchBook1", "Books", FormMethod.Post))*@
+        @using (Html.BeginForm("get_data", "Books", FormMethod.Get))
         {
 
             <form>
                 <div class="main">
                     <div class="sub_main">
                         <label>Book Name</label>
-                        @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.BookName, new {  @class = "form-control" })
 
                     </div>
 
@@ -60,14 +60,14 @@
                     </div>
                     <div class="sub_main">
                         <label>Publihser Name</label>
-                        @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new {  @class = "form-control" })
 
                     </div>
 
 
                     <div class="sub_main">
                         <label>PageNumber</label>
-                        @Html.TextBoxFor(model => model.PageNumber, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.PageNumber, new {  @class = "form-control" })
 
                     </div>
                     <div class="sub_main">
@@ -84,7 +84,7 @@
                         })*@
 
 
-                        @Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.PageRange), " Please Select Page Range", new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.PageRange), " Please Select Page Range", new {@class = "form-control" })
                     </div>
 
 
@@ -103,48 +103,75 @@
 
         }
 
-<div id="listdiv"></div>
+        <div id="listdiv"></div>
 
-    @*<input type="button" onclick="BtnClick()" name="name" value="click me " />*@
-
-
-
-    <script>
-        function BtnClick() {
-            $.ajax({
-                url: "/Books/get_data",
-                method: "GET",
-                success: function (data) {  
-                /*     console.log(data);*/
-
-                    data = JSON.parse(data);
-                    console.log(data);
-
-                    var strtable = "<table>";
-                    //for (i = 0; i < data.length; i++) {
-                    //    strtable = strtable + "<tr><td>"
-                    $.each(data, function (i, v1) {
-                        strtable += "<tr><td>" + v1.BookId + "</td><td>" + v1.BookName + "</td><td>" + v1.CategoryName + "</td><td>" + v1.PublisherName + "</td></tr>";
-                    });
-
-                         strtable += "</table>";
-
-                    $('#listdiv').html(strtable);
-
-                    //$("#bkid").text(data.BookId);
-                    //$("#bkname").text(data.BookName);
-
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            })
-        }
-
-    </script>
+        @*<input type="button" onclick="BtnClick()" name="name" value="click me " />*@
 
 
 
+        <script>
+
+            //      $(document).ready(function(){
+            //$("button").click(function(){
+            function bookdata() {
+                debugger;
+                var BookName = $("#BookName").val();
+                var CategoryId = $("#CategoryId").val();
+                var PublisherId = $("#PublisherId").val();
+                var PageNumber = $("#PageNumber").val();
+                var RowsOfPage = $("#RowsOfPage").val();
+
+
+            }
+
+            BtnClick();
+
+            function BtnClick() {
+                debugger;
+                $.ajax({
+                    url: "/Books/get_data",
+                    method: "GET",
+
+                    //data: bookdata(),
+
+                    data: {
+                        BookName: $("#BookName").val(),
+                        CategoryId : $("#CategoryId").val(),
+                        PublisherId : $("#PublisherId").val(),
+                        PageNumber : $("#PageNumber").val(),
+                        RowsOfPage : $("#RowsOfPage").val()
+                    },
+                    success: function (data) {
+                        /*     console.log(data);*/
+
+                        //data = JSON.parse(data);
+                        /* console.log(data);*/
+
+                        var strtable = "<table>";
+                        //for (i = 0; i < data.length; i++) {
+                        //    strtable = strtable + "<tr><td>"
+                        $.each(data, function (i, v1) {
+                            strtable += "<tr><td>" + v1.BookId + "</td><td>" + v1.BookName + "</td><td>" + v1.CategoryName + "</td><td>" + v1.PublisherName + "</td></tr>";
+                        });
+
+                        strtable += "</table>";
+
+                        $('#listdiv').html(strtable);
+
+
+
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            }
+
+
+
+
+
+        </script>
 
 
 
@@ -152,8 +179,11 @@
 
 
 
-            @*using jqury ajax 1*@
-            @*<div>
+
+
+
+        @*using jqury ajax 1*@
+        @*<div>
                 <table id="tbldata" class="tableData">
                     <tr>BookId</tr>
                     <tr>Book Name</tr>
@@ -181,37 +211,37 @@
 
 
 
-            @*show data using simple table*@ 
-            @*<div class="container-fluid">
-                <table class="table table-hover">
+        @*show data using simple table*@
+        @*<div class="container-fluid">
+            <table class="table table-hover">
+                <tr>
+                    <th>BookId</th>
+                    <th>Book Name</th>
+                    <th>Category Name</th>
+                    <th>Publisher Name</th>
+                </tr>
+
+                @foreach (var a in Model.booklist)
+                {
+
                     <tr>
-                        <th>BookId</th>
-                        <th>Book Name</th>
-                        <th>Category Name</th>
-                        <th>Publisher Name</th>
+                        <td>@Html.DisplayFor(modelitem => a.BookId) </td>
+
+                        <td>@Html.DisplayFor(modelitem => a.BookName) </td>
+                        <td>@Html.DisplayFor(modelitem => a.CategoryName) </td>
+                        <td>@Html.DisplayFor(modelitem => a.PublisherName) </td>
+
                     </tr>
 
-                    @foreach (var a in Model.booklist)
-                    {
 
-                        <tr>
-                            <td>@Html.DisplayFor(modelitem => a.BookId) </td>
+                }
+            </table>
 
-                            <td>@Html.DisplayFor(modelitem => a.BookName) </td>
-                            <td>@Html.DisplayFor(modelitem => a.CategoryName) </td>
-                            <td>@Html.DisplayFor(modelitem => a.PublisherName) </td>
-
-                        </tr>
+        </div>*@
 
 
-                    }
-                </table>
 
-            </div>*@
-      
-
-
-        @*paging*@ 
+        @*paging*@
 
         @*@for (int i = 1; i <= Model.TotalPages; i++)
 
@@ -223,23 +253,23 @@
 
         }*@
 
-        @*paging*@ 
-    @*<div class="container-fluid">
+        @*paging*@
+        @*<div class="container-fluid">
 
-        @for (int a = 1; a < Convert.ToInt32(Model.TotalPages) + 1; a++)
-        {
-            <a href="@Url.Action("SearchBook1", "Books",new { pager=a   })">@a.ToString()</a>
-
-
-        }
+            @for (int a = 1; a < Convert.ToInt32(Model.TotalPages) + 1; a++)
+            {
+                <a href="@Url.Action("SearchBook1", "Books",new { pager=a   })">@a.ToString()</a>
 
 
-    </div>*@
-       
-          
+            }
 
 
-        
+        </div>*@
+
+
+
+
+
 
     </body>
 </html>
