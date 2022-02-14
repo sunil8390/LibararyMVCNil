@@ -500,7 +500,9 @@ namespace LibararyMVCNil.DAL
                                 CategoryId = Convert.ToInt32(dr["CategoryId"]),
                                 CategoryName = dr["CategoryName"].ToString(),
                                 PublisherId = Convert.ToInt32(dr["PublisherId"]),
-                                PublisherName = dr["PublisherName"].ToString()
+                                PublisherName = dr["PublisherName"].ToString(),
+                               Quantity = Convert.ToInt32(dr["Quantity"])
+
 
                             }).ToList();
 

@@ -241,25 +241,22 @@ namespace LibararyMVCNil.Controllers
         }
 
 
+
+      
+
+        [HttpPost]
         public JsonResult get_data(BooksViewModel model)
         {
-            
 
-           
-   
                 Books Books = new Books();
 
-                //BooksViewModel model = new BooksViewModel();
+            //BooksViewModel model = new BooksViewModel();
 
-                //model.BookName = BookName;
-                //model.CategoryId = CategoryId;
-                //model.PublisherId = PublisherId;
-                //model.PageNumber = PageNumber;
-                //model.RowsOfPage = RowsOfPage;
-               
-
-
-             
+            //model.BookName = BookName;
+            //model.CategoryId = CategoryId;
+            //model.PublisherId = PublisherId;
+            //model.PageNumber = PageNumber;
+            //model.RowsOfPage = RowsOfPage;
 
 
             model.booklist = Books.GetList(model);
@@ -269,25 +266,6 @@ namespace LibararyMVCNil.Controllers
 
 
         }
-
-
-        //[HttpPost]
-        //public JsonResult get_data(int pageNumber = 1, int rowsOfPage = 3)
-        //{
-        //    Books Books = new Books();
-        //    BooksViewModel model = new BooksViewModel();
-        //    model.PageNumber = pageNumber;
-        //    model.RowsOfPage = rowsOfPage;
-
-
-        //    model.booklist = Books.GetList(model);
-
-
-
-        //    var json = JsonConvert.SerializeObject(model.booklist);
-        //    return Json(json, JsonRequestBehavior.AllowGet);
-
-        //}
 
 
 

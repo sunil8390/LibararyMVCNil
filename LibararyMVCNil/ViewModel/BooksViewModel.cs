@@ -63,10 +63,7 @@ namespace LibararyMVCNil.ViewModel
             get; set;
         }
 
-        public int booklistfull
-        {
-            get; set;
-        }
+       
 
 
         public List<Categories> categorylist
