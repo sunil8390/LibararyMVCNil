@@ -17,6 +17,12 @@
    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
+
+        body {
+            background-color: #F5EEF8;
+        }
+
+
         .main {
             display: flex;
             margin: 4rem;
@@ -29,11 +35,12 @@
 
 
         h1 {
-            background-color: #F5F5DC;
+            background-color: #7FB3D5;
             padding: 10px;
             text-align: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-weight: 600;
+            font-weight: 700;
+            
         }
     </style>
 
@@ -43,15 +50,16 @@
     <div class="col-lg-12"><h1> Search library Books</h1> </div>
 
 
-    @using (Html.BeginForm("get_data", "Books", FormMethod.Get))
+    @using (Html.BeginForm("SearchBook1", "Books", FormMethod.Get, new { @id = "friendform" }))
     {
 
-        <form>
+        <form >
             <div class="main">
                 <div class="sub_main">
                     <label><b>Book Name</b></label>
-                    @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
 
+                    @Html.TextBoxFor(model => model.BookName, new {  @class = "form-control" })
+                  
                 </div>
 
                 <div class="sub_main">
@@ -61,14 +69,14 @@
                 </div>
                 <div class="sub_main">
                     <label><b>Publihser Name</b></label>
-                    @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new {  @class = "form-control" })
 
                 </div>
 
 
                 <div class="sub_main">
                     <label><b>PageNumber</b></label>
-                    @Html.TextBoxFor(model => model.PageNumber, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.PageNumber, new {  @class = "form-control" })
 
                 </div>
                 <div class="sub_main">
@@ -86,7 +94,7 @@
                 </div>
                 <div class="sub_main">
 
-                    <input type="reset"  onclick="BtnClick()" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
+                    <input type="reset"  onclick="reset()" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
 
                 </div>
             </div>
@@ -95,7 +103,7 @@
     }
 
 <div class="container-fluid">
-    <table class="table table-hover">
+    <table class="table table-striped">
         <thead class="table table-dark">
             <tr>
                 <th>BookId</th>
@@ -113,12 +121,16 @@
     
 
  
-
+    
 
 
 
 
     <script>
+
+        function reset() {
+            BtnClick();
+        }
 
         $(document).ready(function () {
 
@@ -127,44 +139,40 @@
 
             });
 
+        
 
 
         function BtnClick() {
             debugger;
 
-            //let modelObj = {
-            //    BookName: $("#BookName").val(),
-            //    CategoryId: $("#CategoryId").val(),
-            //    PublisherId: $("#PublisherId").val(),
-            //    PageNumber: $("#PageNumber").val(),
-            //    RowsOfPage: $("#RowsOfPage").val()
-            //}
 
-
-
+            var valdata = $("#friendform").serialize();
+            
+          
 
             $.ajax
                 ({
                     url: "/Books/get_data",
-                    method: "POST",
+                    method: "GET",
 
-                    //data: { BookName: BookName, CategoryId: CategoryId, PublisherId: PublisherId, PageNumber: PageNumber, RowsOfPage: RowsOfPage },
-
-                    /*  data: JSON.stringify(modelObj),*/
+                   
 
 
-                    //data:  BookName= $("#BookName") + CategoryId= $("#CategoryId") + PublisherId= $("#PublisherId") + PageNumber= $("#PageNumber") + RowsOfPage = $("#RowsOfPage").val(),
+                  //data:
+                    //{
+                    //    BookName: $("#BookName").val(),
+                    //    CategoryId: $("#CategoryId").val(),
+                    //    PublisherId: $("#PublisherId").val(),
+                    //    PageNumber: $("#PageNumber").val(),
+                    //    RowsOfPage: $("#RowsOfPage").val(),
+                    //    Quantity: $("#Quantity").val()
+
+                    //},
+                    dataType: 'json',
+                  
+                    data: valdata,
 
 
-                    data:
-                    {
-                        BookName: $("#BookName").val(),
-                        CategoryId: $("#CategoryId").val(),
-                        PublisherId: $("#PublisherId").val(),
-                        PageNumber: $("#PageNumber").val(),
-                        RowsOfPage: $("#RowsOfPage").val(),
-                        Quantity: $("#Quantity").val()
-                    },  
                     success: function (data) {
                            /*  console.log(data);*/
                         //data = JSON.parse(data);
@@ -186,7 +194,7 @@
                     },
 
                     error: function (err) {
-                        alert("Please Select Correct value in Page Number and Page Row ");
+                        alert("Somthing went Wrong... ");
                     }
                 })
         }

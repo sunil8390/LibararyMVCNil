@@ -17,9 +17,6 @@ namespace LibararyMVCNil.ViewModel
     {
        
 
-
-
-
         #region Properties
 
 

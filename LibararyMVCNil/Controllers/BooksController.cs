@@ -244,7 +244,7 @@ namespace LibararyMVCNil.Controllers
 
       
 
-        [HttpPost]
+        
         public JsonResult get_data(BooksViewModel model)
         {
 
