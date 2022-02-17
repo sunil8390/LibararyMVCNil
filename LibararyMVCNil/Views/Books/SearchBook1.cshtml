@@ -42,24 +42,97 @@
             font-weight: 700;
             
         }
+
+        #panel, #flip {
+            padding: 5px;
+            text-align: center;
+            background-color: #e5eecc;
+            border: solid 1px #c3c3c3;
+        }
+
+        #panel {
+            padding: 50px;
+            display: none;
+        }
+
+
+
+        .pagelist ul{
+           
+            list-style-type: none;
+            display: flex;
+        }
+
+            .pagelist ul li {
+                padding: 12px;
+                margin:7px;
+                border: solid;
+            }
+
+        .pagelist input {
+            background-color: white;
+            color: black;
+            border: 2px solid #01090e;
+            padding: 10px;
+            margin: 5px;
+            margin-left: 1px;
+            border-radius:10px;
+        }
+
+        .pagelist input:hover {
+                background-color: #0094ff;
+                color: white;
+                
+
+            }
+
+
+        #PageNo1 {
+            background-color: #0a0303;
+            color: #fff;
+        }
+
+
+        .btnstyle {
+            background-color: #f00;
+        }
+
+        .paging-main{
+            display:flex;
+        }
+
+
+       
+
     </style>
 
 </head>
 <body>
+    <div id="flip">Click Here to Read Laibrary Intructions and rules</div>
+    <div id="panel">
+        <p>
+            All the personal belongings such as text books, notebooks, files, briefcases, umbrellas etc. should be kept at the property counter. However calculator and plain paper for note taking can be brought inside the library.
+            Strict silence should be observed within the library. The member must show his/her identity card when demanded by the library staff. Keep Mobile Phone in silent mode.
+        </p>
+    </div>
 
-    <div class="col-lg-12"><h1> Search library Books</h1> </div>
+    <div class="col-lg-12">
+        <h1> Search library Books</h1>
+
+
+    </div>
 
 
     @using (Html.BeginForm("SearchBook1", "Books", FormMethod.Get, new { @id = "friendform" }))
     {
 
-        <form >
+       
             <div class="main">
                 <div class="sub_main">
                     <label><b>Book Name</b></label>
 
-                    @Html.TextBoxFor(model => model.BookName, new {  @class = "form-control" })
-                  
+                    @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
+
                 </div>
 
                 <div class="sub_main">
@@ -69,216 +142,272 @@
                 </div>
                 <div class="sub_main">
                     <label><b>Publihser Name</b></label>
-                    @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new {  @class = "form-control" })
+                    @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
 
                 </div>
 
 
                 <div class="sub_main">
                     <label><b>PageNumber</b></label>
-                    @Html.TextBoxFor(model => model.PageNumber, new {  @class = "form-control" })
+                    @Html.TextBoxFor(model => model.PageNumber, new { @class = "form-control" })
 
                 </div>
+
                 <div class="sub_main">
                     <label><b>RowsOfPage</b></label>
 
                     @Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.PageRange), " Please Select Page Range", new { @class = "form-control" })
                 </div>
 
-
-
                 <div class="sub_main">
+                    @Html.HiddenFor(model => model.TotalPages)
+                    @*<input type="hidden" value="@Model.TotalrowCount" id="totalPageSize" />*@
 
-                    <input type="button" onclick="BtnClick()" name="name" value="Search" class="btn btn-outline-success" style="margin-top:24px" />
+                    @*@Html.TextBoxFor(model => model.TotalPages, new { @class = "form-control" })*@
+
+
 
                 </div>
-                <div class="sub_main">
 
-                    <input type="reset"  onclick="reset()" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
 
+
+
+                    <div class="sub_main">
+
+                        <input type="button" onclick="BtnClick()" name="name" value="Search" class="btn btn-outline-success" style="margin-top:24px" />
+
+                    </div>
+                    <div class="sub_main">
+
+                        <input type="reset" onclick="reset()" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
+
+                    </div>
                 </div>
-            </div>
-        </form>
+
 
     }
 
-<div class="container-fluid">
-    <table class="table table-striped">
-        <thead class="table table-dark">
-            <tr>
-                <th>BookId</th>
-                <th>BookName</th>
-                <th>CategoryName</th>
-                <th>PublisherName</th>
-                <th>Quantity</th>
-            </tr>
-        </thead>
-        <tbody id="listdiv">
-        </tbody>
-    </table>
-</div>
+    <div class="container-fluid">
+        <table class="table table-striped">
+            <thead class="table table-dark">
+                <tr>
+                    <th>BookId</th>
+                    <th>BookName</th>
+                    <th>CategoryName</th>
+                    <th>PublisherName</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody id="listdiv">
+            </tbody>
+        </table>
 
-    
+    </div>
 
- 
-    
+    <div class="paging-main">
 
+            <div id="pagepreviews" class="pagelist"></div>         @*paging --*@
+            <div id="pagediv" class="pagelist">  @*paging*@
 
+            </div>  
 
-
+            <div id="pagenext" class="pagelist"></div>              @*paging  ++*@
+    </div>
     <script>
 
-        function reset() {
-            BtnClick();
-        }
+
 
         $(document).ready(function () {
 
-          
-            BtnClick();
+            $("#flip").click(function () {
+                $("#panel").slideDown("slow");
 
             });
 
-        
+            $("#panel").click(function () {
+
+                $("#panel").slideUp("slow");
+            });
+
+            BtnClick();
+        });
+
+      
+
+
+
+        $(document).on("click", "#PageNo", function () {                  //paging btn
+            $("#PageNumber").val($(this).val());
+
+          
+          
+            BtnClick();
+
+        })
+
+
+       
+
+
+
+
+        $(document).on("click", "#next", function () {                     //next page btn
+           
+
+            //alert($("#PageNumber").val());
+            //alert($("#TotalPages").val());
+
+            if (parseInt($("#PageNumber").val()) < parseInt($("#TotalPages").val()) )  //parseInt($("#TotalPages").val())
+            {
+            
+                var increment = $("#PageNumber").val();
+                
+                $("#PageNumber").val(++increment );
+                BtnClick();
+            }
+
+           
+
+        });
+
+
+
+        $(document).on("click", "#previews", function () {                 //previews page btn
+            /* $("#PageNumber").val($(this).val());*/
+            //data.TotalPages = data.TotalPages - 1;..
+
+
+            if ($("#PageNumber").val() > 1) {
+
+                var decrement = $("#PageNumber").val();
+                $("#PageNumber").val(decrement - 1);
+
+                BtnClick();
+            }
+
+        });
+
+
+
+
+
+
+
 
 
         function BtnClick() {
-            debugger;
+            /* debugger;*/
 
 
             var valdata = $("#friendform").serialize();
-            
-          
+
+
+
+            console.log(valdata);
 
             $.ajax
                 ({
-                    url: "/Books/get_data",
+                    url: "/Books/get_data", //get call on controller
                     method: "GET",
-
-                   
-
-
-                  //data:
-                    //{
-                    //    BookName: $("#BookName").val(),
-                    //    CategoryId: $("#CategoryId").val(),
-                    //    PublisherId: $("#PublisherId").val(),
-                    //    PageNumber: $("#PageNumber").val(),
-                    //    RowsOfPage: $("#RowsOfPage").val(),
-                    //    Quantity: $("#Quantity").val()
-
-                    //},
                     dataType: 'json',
-                  
                     data: valdata,
-
-
                     success: function (data) {
-                           /*  console.log(data);*/
+
+                        console.log(data);
                         //data = JSON.parse(data);
 
-                        var strtable = "<table>" /* <tr><th>BookId</th><th>BookName</th><th>CategoryName</th><th>PublisherName</th></tr>";*/
-                        //for (i = 0; i < data.length; i++) {
-                        //    strtable = strtable + "<tr><td>"
-                        $.each(data, function (i, v1) {
+
+                        //Display table
+                        var strtable = "<table>"
+
+                        $.each(data.booklist, function (i, v1) {
                             strtable +=
                                 "<tr><td>" + v1.BookId + "</td><td>" + v1.BookName + "</td><td>" + v1.CategoryName + "</td><td>" + v1.PublisherName + "</td><td>" + v1.Quantity + "</td></tr>";
 
 
                         });
                         strtable += "</table>";
+
+
                         $('#listdiv').html(strtable);
 
 
 
+
+
+                    //Implement Paging using list tag
+                        //var strPage = "<ul>"
+                        //for (var i = 1; i <= data.TotalPages; i++) {
+                        //    strPage += "<li><a href='' id='PageNo' >" + i + "</a></li>";
+
+                        //}
+                        //strPage += "</ul>"
+                        //$('#pagediv').html(strPage);
+
+
+
+                        //Implement Paging using button
+
+                        var CurrentPage = data.PageNumber; 
+                        var strPage = ""
+
+                        $("#TotalPages").val(data.TotalPages);          //pass value to total page hidden fileld in form
+                       
+
+                    //page
+                        for (var i = 1; i <= data.TotalPages; i++)
+                        {
+                            
+                            if (i == CurrentPage) {
+                                strPage += "<input type='button' id='PageNo1'  value='"  + CurrentPage + "' />" ;
+                            }
+
+                            else
+                            {
+                                strPage += "<input type='button' id='PageNo'  value='" + i + "'/>";
+                            }
+                        }
+                    
+                    //next page
+                        var nextpage = ""
+                        
+                        var nextpage = ""
+                        if (CurrentPage != data.TotalPages)
+                        {
+                            nextpage += "<input type='button' id='next'  value='>>'/>"
+                        }
+                        
+
+
+                     //previews page
+                        var previewspage = ""
+                       
+
+                            previewspage += "<input type='button' id='previews'  value='<<'/>"
+
+                        
+
+                        $('#pagediv').html(strPage);
+                        $('#pagenext').html(nextpage);
+                        $('#pagepreviews').html(previewspage);
+
+
+                        
+
+
                     },
+
 
                     error: function (err) {
                         alert("Somthing went Wrong... ");
                     }
-                })
+                });
+
+
         }
+
+
+
     </script>
-
-
-
-
-
-
-
-
-
-
-    @*using jqury ajax 1*@
-    @*<div>
-                <table id="tbldata" class="tableData">
-                    <tr>BookId</tr>
-                    <tr>Book Name</tr>
-                    <tr>Category Name</tr>
-                    <tr>Publisher Name</tr>
-                </table>
-            </div>
-        <script>
-            $(function () {
-                $.get("get_data", {}, function (data) {
-                var row;
-                    $.each(data, function (i, v1) {
-                    row + "<tr><td>" + v1.BookId + "</td><td>" + v1.BookName + "</td><td>" + v1.CategoryName + "</td><td>" + v1.PublisherName + "</td></tr>"
-                    }
-            });
-                $("#tbldata").append(row);
-        })
-        </script>*@
-
-
-
-
-
-
-    @*show data using simple table*@
-    @*<div class="container-fluid">
-            <table class="table table-hover">
-                <tr>
-                    <th>BookId</th>
-                    <th>Book Name</th>
-                    <th>Category Name</th>
-                    <th>Publisher Name</th>
-                </tr>
-                @foreach (var a in Model.booklist)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelitem => a.BookId) </td>
-                        <td>@Html.DisplayFor(modelitem => a.BookName) </td>
-                        <td>@Html.DisplayFor(modelitem => a.CategoryName) </td>
-                        <td>@Html.DisplayFor(modelitem => a.PublisherName) </td>
-                    </tr>
-                }
-            </table>
-        </div>*@
-
-
-
-    @*paging*@
-
-    @*@for (int i = 1; i <= Model.TotalPages; i++)
-        {
-            <ul>
-                <li>@Html.ActionLink(@i.ToString(), "SearchBook1", "Books", new { page = @i } )</li>
-            </ul>
-        }*@
-
-    @*paging*@
-    @*<div class="container-fluid">
-            @for (int a = 1; a < Convert.ToInt32(Model.TotalPages) + 1; a++)
-            {
-                <a href="@Url.Action("SearchBook1", "Books",new { pager=a   })">@a.ToString()</a>
-            }
-        </div>*@
-
-
-
-
-
-
 </body>
 </html>

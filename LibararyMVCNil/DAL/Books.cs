@@ -502,12 +502,13 @@ namespace LibararyMVCNil.DAL
                                 PublisherId = Convert.ToInt32(dr["PublisherId"]),
                                 PublisherName = dr["PublisherName"].ToString(),
                                Quantity = Convert.ToInt32(dr["Quantity"])
+                              
 
 
                             }).ToList();
 
-              
-                Model.RowCounts = Convert.ToInt32 ( ds.Tables[0].Rows[0]["TotalRecords"].ToString()) ;  
+
+                Model.RowCounts = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalRecords"].ToString());
 
                 //models.RowCounts = ds.Tables[0].Rows.Count;
                 Model.TotalPages = (int)Math.Ceiling((double)Model.RowCounts / Model.RowsOfPage);

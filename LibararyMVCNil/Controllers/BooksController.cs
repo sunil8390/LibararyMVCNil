@@ -160,7 +160,7 @@ namespace LibararyMVCNil.Controllers
 
           
 
-            model.booklist = Books.GetList(model);
+            //model.booklist = Books.GetList(model);
 
             model.PageRange = new List<int>()
             {
@@ -258,11 +258,14 @@ namespace LibararyMVCNil.Controllers
             //model.PageNumber = PageNumber;
             //model.RowsOfPage = RowsOfPage;
 
+           
+
+
 
             model.booklist = Books.GetList(model);
 
            // var json = JsonConvert.SerializeObject(model.booklist);
-            return Json(model.booklist, JsonRequestBehavior.AllowGet);
+            return Json(model, JsonRequestBehavior.AllowGet);
 
 
         }
