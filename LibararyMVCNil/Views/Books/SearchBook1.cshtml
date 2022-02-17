@@ -232,7 +232,11 @@
             BtnClick();
         });
 
-      
+        $("#RowsOfPage").change(function () {                                    //on change event to row of pages 
+            var selectedList = $("#RowsOfPage").val();
+            //alert("You have selected the country - " + selectedCountry);
+            BtnClick();
+        });
 
 
 
