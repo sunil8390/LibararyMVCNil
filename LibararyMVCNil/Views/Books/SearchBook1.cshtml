@@ -179,7 +179,7 @@
                     </div>
                     <div class="sub_main">
 
-                        <input type="reset" onclick="reset()" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
+                        <input type="reset" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
 
                     </div>
                 </div>
@@ -212,10 +212,15 @@
             </div>  
 
             <div id="pagenext" class="pagelist"></div>              @*paging  ++*@
+
+
+            <div id="lable"></div>
     </div>
+
+
+
+
     <script>
-
-
 
         $(document).ready(function () {
 
@@ -229,14 +234,17 @@
                 $("#panel").slideUp("slow");
             });
 
+
+            $("#RowsOfPage").change(function () {                                    //on change event to row of pages 
+                var selectDropdown = $("#RowsOfPage").val();
+                BtnClick(selectDropdown);
+            });
+
             BtnClick();
         });
 
-        $("#RowsOfPage").change(function () {                                    //on change event to row of pages 
-            var selectedList = $("#RowsOfPage").val();
-            //alert("You have selected the country - " + selectedCountry);
-            BtnClick();
-        });
+      
+
 
 
 
@@ -248,11 +256,6 @@
             BtnClick();
 
         })
-
-
-       
-
-
 
 
         $(document).on("click", "#next", function () {                     //next page btn
@@ -268,9 +271,7 @@
                 
                 $("#PageNumber").val(++increment );
                 BtnClick();
-            }
-
-           
+            }         
 
         });
 
@@ -290,11 +291,6 @@
             }
 
         });
-
-
-
-
-
 
 
 
@@ -352,7 +348,8 @@
 
                         //Implement Paging using button
 
-                        var CurrentPage = data.PageNumber; 
+                        var CurrentPage = data.PageNumber;
+                        var fristpage = data.PageNumber;
                         var strPage = ""
 
                         $("#TotalPages").val(data.TotalPages);          //pass value to total page hidden fileld in form
@@ -361,7 +358,7 @@
                     //page
                         for (var i = 1; i <= data.TotalPages; i++)
                         {
-                            
+                            debugger;
                             if (i == CurrentPage) {
                                 strPage += "<input type='button' id='PageNo1'  value='"  + CurrentPage + "' />" ;
                             }
@@ -375,7 +372,7 @@
                     //next page
                         var nextpage = ""
                         
-                        var nextpage = ""
+                        
                         if (CurrentPage != data.TotalPages)
                         {
                             nextpage += "<input type='button' id='next'  value='>>'/>"
@@ -385,18 +382,16 @@
 
                      //previews page
                         var previewspage = ""
-                       
+                        if (fristpage != 1)
+                        {
+                        previewspage += "<input type='button' id='previews'  value='<<'/>"
+                        }
 
-                            previewspage += "<input type='button' id='previews'  value='<<'/>"
 
-                        
 
                         $('#pagediv').html(strPage);
                         $('#pagenext').html(nextpage);
                         $('#pagepreviews').html(previewspage);
-
-
-                        
 
 
                     },
