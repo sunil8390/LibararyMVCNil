@@ -183,6 +183,7 @@
     <Content Include="Views\Books\Index.cshtml" />
     <Content Include="Views\Books\SearchBook.cshtml" />
     <Content Include="Views\Books\SearchBook1.cshtml" />
+    <Content Include="Views\Shared\_SearchBookPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

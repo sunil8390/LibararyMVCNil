@@ -47,7 +47,7 @@ namespace LibararyMVCNil.Controllers
 
             //             }).ToList();
 
-            return View(/*BookList*/);
+            return View(/*BookLists*/);
 
 
 
@@ -242,30 +242,23 @@ namespace LibararyMVCNil.Controllers
 
 
 
-      
-
-        
-        public JsonResult get_data(BooksViewModel model)
+        public ActionResult get_data(BooksViewModel model)
         {
 
-                Books Books = new Books();
+            Books Books = new Books();
 
-            //BooksViewModel model = new BooksViewModel();
 
-            //model.BookName = BookName;
-            //model.CategoryId = CategoryId;
-            //model.PublisherId = PublisherId;
-            //model.PageNumber = PageNumber;
-            //model.RowsOfPage = RowsOfPage;
 
-           
+
 
 
 
             model.booklist = Books.GetList(model);
 
-           // var json = JsonConvert.SerializeObject(model.booklist);
-            return Json(model, JsonRequestBehavior.AllowGet);
+            // var json = JsonConvert.SerializeObject(model.booklist);
+            return PartialView("_SearchBookPartial", model);
+
+
 
 
         }
@@ -273,19 +266,12 @@ namespace LibararyMVCNil.Controllers
 
 
 
-        public ActionResult SearchBook2( )
-
-        {
 
 
 
 
 
-            
-            return View();  
 
-
-        }//empty 
 
 
 

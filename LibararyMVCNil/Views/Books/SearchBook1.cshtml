@@ -187,21 +187,12 @@
 
     }
 
-    <div class="container-fluid">
-        <table class="table table-striped">
-            <thead class="table table-dark">
-                <tr>
-                    <th>BookId</th>
-                    <th>BookName</th>
-                    <th>CategoryName</th>
-                    <th>PublisherName</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody id="listdiv">
-            </tbody>
-        </table>
+   
 
+    <div id="partial_table">
+        <table>
+            
+        </table>
     </div>
 
     <div class="paging-main">
@@ -214,8 +205,11 @@
             <div id="pagenext" class="pagelist"></div>              @*paging  ++*@
 
 
-            <div id="lable"></div>
+            
     </div>
+
+
+   
 
 
 
@@ -309,7 +303,7 @@
                 ({
                     url: "/Books/get_data", //get call on controller
                     method: "GET",
-                    dataType: 'json',
+                   /* dataType: 'json',*/
                     data: valdata,
                     success: function (data) {
 
@@ -318,20 +312,22 @@
 
 
                         //Display table
-                        var strtable = "<table>"
+                        //var strtable = "<table>"
 
-                        $.each(data.booklist, function (i, v1) {
-                            strtable +=
-                                "<tr><td>" + v1.BookId + "</td><td>" + v1.BookName + "</td><td>" + v1.CategoryName + "</td><td>" + v1.PublisherName + "</td><td>" + v1.Quantity + "</td></tr>";
-
-
-                        });
-                        strtable += "</table>";
+                        //$.each(data.booklist, function (i, v1) {
+                        //    strtable +=
+                        //        "<tr><td>" + v1.BookId + "</td><td>" + v1.BookName + "</td><td>" + v1.CategoryName + "</td><td>" + v1.PublisherName + "</td><td>" + v1.Quantity + "</td></tr>";
 
 
-                        $('#listdiv').html(strtable);
+                        //});
+                        //strtable += "</table>";
 
 
+                        //$('#listdiv').html(strtable);
+                        debugger;
+
+                        $('#partial_table').html(data);
+                        
 
 
 
@@ -384,7 +380,7 @@
                         var previewspage = ""
                         if (fristpage != 1)
                         {
-                        previewspage += "<input type='button' id='previews'  value='<<'/>"
+                             previewspage += "<input type='button' id='previews'  value='<<'/>"
                         }
 
 
