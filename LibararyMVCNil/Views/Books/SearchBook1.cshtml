@@ -126,290 +126,298 @@
     @using (Html.BeginForm("SearchBook1", "Books", FormMethod.Get, new { @id = "friendform" }))
     {
 
-       
-            <div class="main">
-                <div class="sub_main">
-                    <label><b>Book Name</b></label>
 
-                    @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
+        <div class="main">
+            <div class="sub_main">
+                <label><b>Book Name</b></label>
 
-                </div>
+                @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
 
-                <div class="sub_main">
-                    <label><b>Category Type</b></label>
-                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control" })
+            </div>
 
-                </div>
-                <div class="sub_main">
-                    <label><b>Publihser Name</b></label>
-                    @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
+            <div class="sub_main">
+                <label><b>Category Type</b></label>
+                @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control" })
 
-                </div>
+            </div>
+            <div class="sub_main">
+                <label><b>Publihser Name</b></label>
+                @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
 
-
-                <div class="sub_main">
-                    <label><b>PageNumber</b></label>
-                    @Html.TextBoxFor(model => model.PageNumber, new { @class = "form-control" })
-
-                </div>
-
-                <div class="sub_main">
-                    <label><b>RowsOfPage</b></label>
-
-                    @Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.PageRange), " Please Select Page Range", new { @class = "form-control" })
-                </div>
-
-                <div class="sub_main">
-                    @Html.HiddenFor(model => model.TotalPages)
-                    @*<input type="hidden" value="@Model.TotalrowCount" id="totalPageSize" />*@
-
-                    @*@Html.TextBoxFor(model => model.TotalPages, new { @class = "form-control" })*@
+            </div>
 
 
+            <div class="sub_main">
+                <label><b>PageNumber</b></label>
+                @Html.TextBoxFor(model => model.PageNumber, new { @class = "form-control" })
 
-                </div>
+            </div>
+
+            <div class="sub_main">
+                <label><b>RowsOfPage</b></label>
+
+                @Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.PageRange), " Please Select Page Range", new { @class = "form-control" })
+            </div>
+
+            <div class="sub_main">
+                @Html.HiddenFor(model => model.TotalPages)
+                @*<input type="hidden" value="@Model.TotalrowCount" id="totalPageSize" />*@
+
+                @*@Html.TextBoxFor(model => model.TotalPages, new { @class = "form-control" })*@
 
 
 
+            </div>
 
-                    <div class="sub_main">
 
-                        <input type="button" onclick="BtnClick()" name="name" value="Search" class="btn btn-outline-success" style="margin-top:24px" />
 
-                    </div>
-                    <div class="sub_main">
 
-                        <input type="reset" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
+            <div class="sub_main">
 
-                    </div>
-             </div>
+                <input type="button" onclick="BtnClick()"  value="Search" class="btn btn-outline-success" style="margin-top:24px" />
+
+            </div>
+            <div class="sub_main">
+
+                <input type="reset" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
+
+            </div>
+
+
+        </div>
+
+        <div class="sub_main">
+
+            <a href="~/Books/AddBook"> <input type="button" name="name" value="Add" class="btn btn-outline-success" style="margin-top:24px" /></a>
+
+        </div>
 
 
     }
 
-   
-
-                <div id="partial_table"></div>    @*partial table*@
-        
-                <div id="partialpaging"> </div>    @*partial paging btn*@ 
 
 
-                <div id="partiallable"> </div>      @*partial lable*@ 
+    <div id="partial_table"></div>    @*partial table*@
+
+    <div id="partialpaging"> </div>    @*partial paging btn*@
+
+
+    <div id="partiallable"> </div>      @*partial lable*@
 
 
 
-                <!--<div class="paging-main">
+    <!--<div class="paging-main">
 
-                            <div id="pagepreviews" class="pagelist"></div>-->         @*paging --*@
-                            <!--<div id="pagediv" class="pagelist"> </div>-->               @*paging*@
+                <div id="pagepreviews" class="pagelist"></div>-->
+    @*paging --*@
+    <!--<div id="pagediv" class="pagelist"> </div>-->               @*paging*@
 
-                            <!--<div id="pagenext" class="pagelist"></div>-->              @*paging  ++*@
+    <!--<div id="pagenext" class="pagelist"></div>-->              @*paging  ++*@
 
-                <!--</div>-->
-
-
-   
+    <!--</div>-->
 
 
 
 
 
 
-    <script>
-
-        $(document).ready(function () {
-
-            $("#flip").click(function () {
-                $("#panel").slideDown("slow");
-
-            });
-
-            $("#panel").click(function () {
-
-                $("#panel").slideUp("slow");
-            });
 
 
-            $("#RowsOfPage").change(function () {                                    //on change event to row of pages 
-                var selectDropdown = $("#RowsOfPage").val();
-                BtnClick(selectDropdown);
-            });
 
-            BtnClick();
+<script>
+
+    $(document).ready(function () {
+
+        $("#flip").click(function () {
+            $("#panel").slideDown("slow");
+
         });
 
-      
+        $("#panel").click(function () {
+
+            $("#panel").slideUp("slow");
+        });
+
+
+        $("#RowsOfPage").change(function () {                                    //on change event to row of pages
+            var selectDropdown = $("#RowsOfPage").val();
+            BtnClick(selectDropdown);
+        });
+
+        BtnClick();
+    });
 
 
 
 
-        $(document).on("click", "#PageNo", function () {                  //paging btn
-            $("#PageNumber").val($(this).val());
-
-          
-          
-            BtnClick();
-
-        })
 
 
-        $(document).on("click", "#next", function () {                     //next page btn
-           
+    $(document).on("click", "#PageNo", function () {                  //paging btn
+        $("#PageNumber").val($(this).val());
+
+
+
+        BtnClick();
+
+    })
+
+
+    //$(document).on("click", "#next", function () {                     //next page btn
+
+
+   
+
+       //if (parseInt($("#PageNumber").val()) < parseInt($("#TotalPages").val()))  //parseInt($("#TotalPages").val())
+        //{
 
             var increment = $("#PageNumber").val();
 
-            $("#PageNumber").val(++increment);
+                $("#PageNumber").val(parseInt(increment) + 1);
+          
             BtnClick();
+        //}
+
+    //});
 
 
-            //alert($("#PageNumber").val());
-            //alert($("#TotalPages").val());
-
-            //if (parseInt($("#PageNumber").val()) < parseInt($("#TotalPages").val()) )  //parseInt($("#TotalPages").val())
-            //{
-            
-                //var increment = $("#PageNumber").val();
-                
-                //$("#PageNumber").val(++increment );
-                //BtnClick();
-            //}         
-
-        });
+ 
 
 
 
-        $(document).on("click", "#previews", function () {                 //previews page btn
-            /* $("#PageNumber").val($(this).val());*/
-            //data.TotalPages = data.TotalPages - 1;..
+    $(document).on("click", "#previews", function () {                 //previews page btn
+        /* $("#PageNumber").val($(this).val());*/
+        //data.TotalPages = data.TotalPages - 1;..
 
 
-            if ($("#PageNumber").val() > 1) {
+        //if ($("#PageNumber").val() > 1) {
 
-                var decrement = $("#PageNumber").val();
-                $("#PageNumber").val(decrement - 1);
+            var decrement = $("#PageNumber").val();
+            $("#PageNumber").val(decrement - 1);
 
-                BtnClick();
-            }
+            BtnClick();
+        //}
 
-        });
+    });
 
 
 
 
-        function BtnClick() {
-            /* debugger;*/
+    function BtnClick() {
+        /* debugger;*/
 
 
-            var valdata = $("#friendform").serialize();
+        var valdata = $("#friendform").serialize();
 
 
 
-            console.log(valdata);
+        //console.log(valdata);
 
-            $.ajax
-                ({
-                    url: "/Books/get_data", //get call on controller
-                    method: "GET",
-                   /* dataType: 'json',*/
-                    data: valdata,
-                    success: function (data) {
-                        $('#partial_table').html(data);
-                        //console.log(data);
-                        //data = JSON.parse(data);
+        $.ajax
+            ({
+                url: "/Books/get_data", //get call on controller
+                method: "GET",
+                /* dataType: 'json',*/
+                data: valdata,
+                success: function (data) {
+                    $('#partial_table').html(data);
 
 
-                        //Display table
-                        //var strtable = "<table>"
-
-                        //$.each(data.booklist, function (i, v1) {
-                        //    strtable +=
-                        //        "<tr><td>" + v1.BookId + "</td><td>" + v1.BookName + "</td><td>" + v1.CategoryName + "</td><td>" + v1.PublisherName + "</td><td>" + v1.Quantity + "</td></tr>";
+                    //console.log(data);
+                    //data = JSON.parse(data);
 
 
-                        //});
-                        //strtable += "</table>";
+                    //Display table
+                    //var strtable = "<table>"
+
+                    //$.each(data.booklist, function (i, v1) {
+                    //    strtable +=
+                    //        "<tr><td>" + v1.BookId + "</td><td>" + v1.BookName + "</td><td>" + v1.CategoryName + "</td><td>" + v1.PublisherName + "</td><td>" + v1.Quantity + "</td></tr>";
 
 
-                        //$('#listdiv').html(strtable);
-                       
+                    //});
+                    //strtable += "</table>";
 
-                        
-                        
+
+                    //$('#listdiv').html(strtable);
+
+
+
+
 
 
 
                     //Implement Paging using list tag
-                        //var strPage = "<ul>"
-                        //for (var i = 1; i <= data.TotalPages; i++) {
-                        //    strPage += "<li><a href='' id='PageNo' >" + i + "</a></li>";
+                    //var strPage = "<ul>"
+                    //for (var i = 1; i <= data.TotalPages; i++) {
+                    //    strPage += "<li><a href='' id='PageNo' >" + i + "</a></li>";
 
-                        //}
-                        //strPage += "</ul>"
-                        //$('#pagediv').html(strPage);
+                    //}
+                    //strPage += "</ul>"
+                    //$('#pagediv').html(strPage);
 
 
 
-                        //Implement Paging using button
+                    //Implement Paging using button
 
-                        //var CurrentPage = data.PageNumber;
-                        //var fristpage = data.PageNumber;
-                        //var strPage = ""
+                    //var CurrentPage = data.PageNumber;
+                    //var fristpage = data.PageNumber;
+                    //var strPage = ""
 
-                        //$("#TotalPages").val(data.TotalPages);          //pass value to total page hidden fileld in form
-                       
+                    //$("#TotalPages").val(data.TotalPages);          //pass value to total page hidden fileld in form
+
 
                     //page
-                        //for (var i = 1; i <= data.TotalPages; i++)
-                        //{
-                        //    debugger;
-                        //    if (i == CurrentPage) {
-                        //        strPage += "<input type='button' id='PageNo1'  value='"  + CurrentPage + "' />" ;
-                        //    }
+                    //for (var i = 1; i <= data.TotalPages; i++)
+                    //{
+                    //    debugger;
+                    //    if (i == CurrentPage) {
+                    //        strPage += "<input type='button' id='PageNo1'  value='"  + CurrentPage + "' />" ;
+                    //    }
 
-                        //    else
-                        //    {
-                        //        strPage += "<input type='button' id='PageNo'  value='" + i + "'/>";
-                        //    }
-                        //}
-                    
-                    //next page
-                        //var nextpage = ""
-                        
-                        
-                        //if (CurrentPage != data.TotalPages)
-                        //{
-                        //    nextpage += "<input type='button' id='next'  value='>>'/>"
-                        //}
-                        
-
-
-                     //previews page
-                        //var previewspage = ""
-                        //if (fristpage != 1)
-                        //{
-                        //     previewspage += "<input type='button' id='previews'  value='<<'/>"
-                        //}
-
-
-
-                        //$('#pagediv').html(strPage);
-                        //$('#pagenext').html(nextpage);
-                        //$('#pagepreviews').html(previewspage);
-
-
-                    },
-
-
-                    //error: function (err) {
-                    //    alert("Somthing went Wrong... ");
+                    //    else
+                    //    {
+                    //        strPage += "<input type='button' id='PageNo'  value='" + i + "'/>";
+                    //    }
                     //}
-                });
+
+                    //next page
+                    //var nextpage = ""
 
 
-        }
+                    //if (CurrentPage != data.TotalPages)
+                    //{
+                    //    nextpage += "<input type='button' id='next'  value='>>'/>"
+                    //}
 
 
 
-    </script>
+                    //previews page
+                    //var previewspage = ""
+                    //if (fristpage != 1)
+                    //{
+                    //     previewspage += "<input type='button' id='previews'  value='<<'/>"
+                    //}
+
+
+
+                    //$('#pagediv').html(strPage);
+                    //$('#pagenext').html(nextpage);
+                    //$('#pagepreviews').html(previewspage);
+
+
+                },
+
+
+                //error: function (err) {
+                //    alert("Somthing went Wrong... ");
+                //}
+            });
+
+
+    }
+
+
+
+</script>
 </body>
 </html>

@@ -264,9 +264,52 @@ namespace LibararyMVCNil.Controllers
         }
 
 
+        public ActionResult AddBook()
+        {
+           
+            BooksViewModel Model = new BooksViewModel();
+
+            Books books = new Books();
 
 
 
+            //Categories
+
+            Categories categories = new Categories();
+            Model.categorylist = categories.GetList();
+
+
+            //Publishers
+
+
+            Publishers Publisher = new Publishers();
+
+            Model.publisherlist = Publisher.GetList();
+
+            return View(Model);
+        }
+
+        [HttpPost]
+        public ActionResult AddBook(BooksViewModel Model)
+        {
+
+           
+
+            Books books = new Books();
+
+            books.BookName = Model.BookName;
+            books.CategoryId = Model.CategoryId;
+            books.PublisherId = Model.PublisherId;
+            books.Quantity = Model.Quantity;
+            books.IsActive = Model.IsActive;
+
+
+            books.Save();
+
+           
+
+            return RedirectToAction("SearchBook1");
+        }
 
 
 

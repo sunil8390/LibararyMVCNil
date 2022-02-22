@@ -75,7 +75,7 @@
             }
 
 
-        #PageNo1 {
+        .pagestyle {
             background-color: #0a0303;
             color: #fff;
         }
@@ -189,7 +189,7 @@
 
             if (i == Model.PageNumber)
             {
-                <input type='button' id='PageNo1' value='@Model.PageNumber' />
+                <input type='button' id='PageNo1' class="pagestyle" value='@Model.PageNumber' />
 
                 @*<button id='PageNo' value=""> @Model.PageNumber </button>*@
             }

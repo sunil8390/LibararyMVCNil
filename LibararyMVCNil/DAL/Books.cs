@@ -298,6 +298,16 @@ namespace LibararyMVCNil.DAL
                     this.db.AddInParameter(com, "PublisherId", DbType.Int32, DBNull.Value);
                 }
 
+                if (this.Quantity > 0)
+                {
+                    this.db.AddInParameter(com, "Quantity", DbType.Int32, this.Quantity);
+                }
+                else
+                {
+                    this.db.AddInParameter(com, "Quantity", DbType.Int32, DBNull.Value);
+                }
+
+
 
                 this.db.AddInParameter(com, "IsActive", DbType.Boolean, this.IsActive);
                 if (this.CreatedBy > 0)
@@ -333,7 +343,13 @@ namespace LibararyMVCNil.DAL
                     this.db.AddInParameter(com, "ModifiedOn", DbType.DateTime, DBNull.Value);
                 }
                 this.db.ExecuteNonQuery(com);
+
                 this.BookId = Convert.ToInt32(this.db.GetParameterValue(com, "BookId"));      // Read in the output parameter value
+
+
+
+            
+
             }
             catch (Exception ex)
             {
