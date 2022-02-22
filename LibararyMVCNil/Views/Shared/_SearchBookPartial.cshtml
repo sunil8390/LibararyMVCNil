@@ -93,8 +93,8 @@
 <body>
 
 
-    <div class="container-fluid" id="partial_table">
-        <table class="table table-striped" >
+    <div class="container-fluid">
+        <table class="table table-striped">
             <thead class="table table-dark">
                 <tr>
                     <th>BookId</th>
@@ -104,7 +104,7 @@
                     <th>Quantity</th>
                 </tr>
             </thead>
-            <tbody >
+            <tbody>
 
 
                 @foreach (var Book in Model.booklist)
@@ -124,8 +124,112 @@
             </tbody>
 
         </table>
+    </div>
+
+
+    @*labling*@ 
+
+
+    <div id="partiallable" class="container-fluid">
+
+        @{
+            int FromPage;
+            int ToPage;
+
+            var rowsOfPage = Model.RowsOfPage;
+            var pagenumbers = Model.PageNumber;
+            var totalrecords = Model.RowCounts;
+
+
+            var ToValueTemp = Model.PageNumber * Model.RowsOfPage;
+
+
+        }
+
+
+        @if (Model.PageNumber == 1)
+        {
+            FromPage = 1;
+        }
+        else
+        {
+            FromPage = (rowsOfPage * (pagenumbers - 1)) + 1;
+        }
+
+        @if (ToValueTemp > totalrecords)
+        {
+            ToPage = totalrecords;
+        }
+        else
+        {
+            ToPage = ToValueTemp;
+        }
+
+        <label id="Records">Showing Records  @FromPage  - @ToPage   of Total Records   @totalrecords </label>
+
+
 
     </div>
+
+
+
+    @*paging*@
+
+    <div id="partialpaging" class="pagelist container-fluid">
+
+
+        @if (Model.PageNumber > 1)
+        {
+            <input type='button' id='previews' value='<<' />
+        }
+
+
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+
+            if (i == Model.PageNumber)
+            {
+                <input type='button' id='PageNo1' value='@Model.PageNumber' />
+
+                @*<button id='PageNo' value=""> @Model.PageNumber </button>*@
+            }
+
+            else
+            {
+                <input type='button' id='PageNo' value='@i' />
+                @*<button id='PageNo' value=""> @i</button>*@
+            }
+        }
+
+
+
+
+        @if (Model.PageNumber != Model.TotalPages)
+        {
+            <input type='button' id='next' value='>>' />
+        }
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
 
 
 </body>

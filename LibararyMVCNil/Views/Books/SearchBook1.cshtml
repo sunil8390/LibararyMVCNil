@@ -182,34 +182,35 @@
                         <input type="reset" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
 
                     </div>
-                </div>
+             </div>
 
 
     }
 
    
 
-    <div id="partial_table">
-        <table>
-            
-        </table>
-    </div>
-
-    <div class="paging-main">
-
-            <div id="pagepreviews" class="pagelist"></div>         @*paging --*@
-            <div id="pagediv" class="pagelist">  @*paging*@
-
-            </div>  
-
-            <div id="pagenext" class="pagelist"></div>              @*paging  ++*@
+                <div id="partial_table"></div>    @*partial table*@
+        
+                <div id="partialpaging"> </div>    @*partial paging btn*@ 
 
 
-            
-    </div>
+                <div id="partiallable"> </div>      @*partial lable*@ 
+
+
+
+                <!--<div class="paging-main">
+
+                            <div id="pagepreviews" class="pagelist"></div>-->         @*paging --*@
+                            <!--<div id="pagediv" class="pagelist"> </div>-->               @*paging*@
+
+                            <!--<div id="pagenext" class="pagelist"></div>-->              @*paging  ++*@
+
+                <!--</div>-->
 
 
    
+
+
 
 
 
@@ -255,17 +256,23 @@
         $(document).on("click", "#next", function () {                     //next page btn
            
 
+            var increment = $("#PageNumber").val();
+
+            $("#PageNumber").val(++increment);
+            BtnClick();
+
+
             //alert($("#PageNumber").val());
             //alert($("#TotalPages").val());
 
-            if (parseInt($("#PageNumber").val()) < parseInt($("#TotalPages").val()) )  //parseInt($("#TotalPages").val())
-            {
+            //if (parseInt($("#PageNumber").val()) < parseInt($("#TotalPages").val()) )  //parseInt($("#TotalPages").val())
+            //{
             
-                var increment = $("#PageNumber").val();
+                //var increment = $("#PageNumber").val();
                 
-                $("#PageNumber").val(++increment );
-                BtnClick();
-            }         
+                //$("#PageNumber").val(++increment );
+                //BtnClick();
+            //}         
 
         });
 
@@ -306,8 +313,8 @@
                    /* dataType: 'json',*/
                     data: valdata,
                     success: function (data) {
-
-                        console.log(data);
+                        $('#partial_table').html(data);
+                        //console.log(data);
                         //data = JSON.parse(data);
 
 
@@ -324,9 +331,9 @@
 
 
                         //$('#listdiv').html(strtable);
-                        debugger;
+                       
 
-                        $('#partial_table').html(data);
+                        
                         
 
 
@@ -344,58 +351,58 @@
 
                         //Implement Paging using button
 
-                        var CurrentPage = data.PageNumber;
-                        var fristpage = data.PageNumber;
-                        var strPage = ""
+                        //var CurrentPage = data.PageNumber;
+                        //var fristpage = data.PageNumber;
+                        //var strPage = ""
 
-                        $("#TotalPages").val(data.TotalPages);          //pass value to total page hidden fileld in form
+                        //$("#TotalPages").val(data.TotalPages);          //pass value to total page hidden fileld in form
                        
 
                     //page
-                        for (var i = 1; i <= data.TotalPages; i++)
-                        {
-                            debugger;
-                            if (i == CurrentPage) {
-                                strPage += "<input type='button' id='PageNo1'  value='"  + CurrentPage + "' />" ;
-                            }
+                        //for (var i = 1; i <= data.TotalPages; i++)
+                        //{
+                        //    debugger;
+                        //    if (i == CurrentPage) {
+                        //        strPage += "<input type='button' id='PageNo1'  value='"  + CurrentPage + "' />" ;
+                        //    }
 
-                            else
-                            {
-                                strPage += "<input type='button' id='PageNo'  value='" + i + "'/>";
-                            }
-                        }
+                        //    else
+                        //    {
+                        //        strPage += "<input type='button' id='PageNo'  value='" + i + "'/>";
+                        //    }
+                        //}
                     
                     //next page
-                        var nextpage = ""
+                        //var nextpage = ""
                         
                         
-                        if (CurrentPage != data.TotalPages)
-                        {
-                            nextpage += "<input type='button' id='next'  value='>>'/>"
-                        }
+                        //if (CurrentPage != data.TotalPages)
+                        //{
+                        //    nextpage += "<input type='button' id='next'  value='>>'/>"
+                        //}
                         
 
 
                      //previews page
-                        var previewspage = ""
-                        if (fristpage != 1)
-                        {
-                             previewspage += "<input type='button' id='previews'  value='<<'/>"
-                        }
+                        //var previewspage = ""
+                        //if (fristpage != 1)
+                        //{
+                        //     previewspage += "<input type='button' id='previews'  value='<<'/>"
+                        //}
 
 
 
-                        $('#pagediv').html(strPage);
-                        $('#pagenext').html(nextpage);
-                        $('#pagepreviews').html(previewspage);
+                        //$('#pagediv').html(strPage);
+                        //$('#pagenext').html(nextpage);
+                        //$('#pagepreviews').html(previewspage);
 
 
                     },
 
 
-                    error: function (err) {
-                        alert("Somthing went Wrong... ");
-                    }
+                    //error: function (err) {
+                    //    alert("Somthing went Wrong... ");
+                    //}
                 });
 
 
