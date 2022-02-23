@@ -161,9 +161,7 @@
 
             <div class="sub_main">
                 @Html.HiddenFor(model => model.TotalPages)
-                @*<input type="hidden" value="@Model.TotalrowCount" id="totalPageSize" />*@
-
-                @*@Html.TextBoxFor(model => model.TotalPages, new { @class = "form-control" })*@
+               
 
 
 
@@ -256,47 +254,28 @@
         $("#PageNumber").val($(this).val());
 
 
-
         BtnClick();
-
     })
+    $(document).on("click", "#next", function () {                     //next page btn
 
-
-    //$(document).on("click", "#next", function () {                     //next page btn
-
-
-   
-
-       //if (parseInt($("#PageNumber").val()) < parseInt($("#TotalPages").val()))  //parseInt($("#TotalPages").val())
+     
+      
+        //if (parseInt($("#PageNumber").val()) < parseInt($("#TotalPages").val()) )  //parseInt($("#TotalPages").val())
         //{
 
-            var increment = $("#PageNumber").val();
+        var increment = $("#PageNumber").val();
 
-                $("#PageNumber").val(parseInt(increment) + 1);
-          
-            BtnClick();
-        //}
-
-    //});
-
-
- 
-
-
-
+        $("#PageNumber").val(++increment );
+        BtnClick();
+        //}         
+    });
     $(document).on("click", "#previews", function () {                 //previews page btn
-        /* $("#PageNumber").val($(this).val());*/
-        //data.TotalPages = data.TotalPages - 1;..
-
-
-        //if ($("#PageNumber").val() > 1) {
-
+       
+        if ($("#PageNumber").val() > 1) {
             var decrement = $("#PageNumber").val();
             $("#PageNumber").val(decrement - 1);
-
             BtnClick();
-        //}
-
+        }
     });
 
 
@@ -314,8 +293,8 @@
 
         $.ajax
             ({
-                url: "/Books/get_data", //get call on controller
-                method: "GET",
+                url: "/Books/SearchBook1", //get call on controller
+                method: "POST",
                 /* dataType: 'json',*/
                 data: valdata,
                 success: function (data) {

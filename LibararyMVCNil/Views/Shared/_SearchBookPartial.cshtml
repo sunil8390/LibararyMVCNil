@@ -75,7 +75,7 @@
             }
 
 
-        .pagestyle {
+        #PageNo1 {
             background-color: #0a0303;
             color: #fff;
         }
@@ -102,6 +102,8 @@
                     <th>CategoryName</th>
                     <th>PublisherName</th>
                     <th>Quantity</th>
+                    <td> Edit Book </td>
+
                 </tr>
             </thead>
             <tbody>
@@ -109,16 +111,18 @@
 
                 @foreach (var Book in Model.booklist)
                 {
-                    <tr>
-                        <td>@Book.BookId</td>
-                        <td>@Book.BookName</td>
-                        <td>@Book.CategoryName</td>
-                        <td>@Book.PublisherName</td>
-                        <td>@Book.Quantity</td>
+                <tr>
+                    <td>@Book.BookId</td>
+                    <td>@Book.BookName</td>
+                    <td>@Book.CategoryName</td>
+                    <td>@Book.PublisherName</td>
+                    <td>@Book.Quantity</td>
+                    @*<td> <a href="~/Books/AddBook"> Edit </a></td>*@
+                    <td>@Html.ActionLink("Edit", "AddBook", new { Id = Book.BookId })</td>
 
 
 
-                    </tr>
+                </tr>
                 }
 
             </tbody>
@@ -189,14 +193,14 @@
 
             if (i == Model.PageNumber)
             {
-                <input type='button' id='PageNo1' class="pagestyle" value='@Model.PageNumber' />
+                <input type="button" id="PageNo1"  value="@Model.PageNumber" />
 
                 @*<button id='PageNo' value=""> @Model.PageNumber </button>*@
             }
 
             else
             {
-                <input type='button' id='PageNo' value='@i' />
+                <input type="button"  id="PageNo" value="@i" />
                 @*<button id='PageNo' value=""> @i</button>*@
             }
         }

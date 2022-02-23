@@ -378,8 +378,35 @@ namespace LibararyMVCNil.DAL
                 {
                     this.db.AddInParameter(com, "BookName", DbType.String, DBNull.Value);
                 }
-                
+
+                if (this.CategoryId > 0)
+                {
+                    this.db.AddInParameter(com, "CategoryId", DbType.Int32, this.CategoryId);
+                }
+                else
+                {
+                    this.db.AddInParameter(com, "CategoryId", DbType.Int32, DBNull.Value);
+                }
+                if (this.PublisherId > 0)
+                {
+                    this.db.AddInParameter(com, "PublisherId", DbType.Int32, this.PublisherId);
+                }
+                else
+                {
+                    this.db.AddInParameter(com, "PublisherId", DbType.Int32, DBNull.Value);
+                }
+
+                if (this.Quantity > 0)
+                {
+                    this.db.AddInParameter(com, "Quantity", DbType.Int32, this.Quantity);
+                }
+                else
+                {
+                    this.db.AddInParameter(com, "Quantity", DbType.Int32, DBNull.Value);
+                }
+
                 this.db.AddInParameter(com, "IsActive", DbType.Boolean, this.IsActive);
+
                 if (this.CreatedBy > 0)
                 {
                     this.db.AddInParameter(com, "CreatedBy", DbType.Int32, this.CreatedBy);

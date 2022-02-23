@@ -155,12 +155,11 @@ namespace LibararyMVCNil.Controllers
             model.PageNumber = 1;
             model.RowsOfPage =10;
 
-            //model.PageNumber = pager;   //For paging 
-            //model.RowsOfPage = 3;
+           
 
-          
 
-            //model.booklist = Books.GetList(model);
+
+            model.booklist = Books.GetList(model);
 
             model.PageRange = new List<int>()
             {
@@ -195,21 +194,13 @@ namespace LibararyMVCNil.Controllers
         {
            
             Books db = new Books();
-            //db.BookId = Model.BookId;
-            //db.BookName = Model.BookName;
-            //db.CategoryId = Model.CategoryId;
-            //db.PublisherId = Model.PublisherId;
 
-
-            //db.PageNumber = Model.PageNumber;
-            //db.RowsOfPage = Model.RowsOfPage;
-
-            Model.PageRange = new List<int>()
-            {
-                3,
-                5,
-                10
-            };
+            //Model.PageRange = new List<int>()
+            //{
+            //    3,
+            //    5,
+            //    10
+            //};
 
 
 
@@ -235,41 +226,44 @@ namespace LibararyMVCNil.Controllers
 
 
 
-            return View(Model);
+            //return View(Model);
+            return PartialView("_SearchBookPartial", Model);
 
 
         }
 
 
 
-        public ActionResult get_data(BooksViewModel model)
+        public ActionResult get_data(BooksViewModel model)    //partial view search book 
         {
 
-            Books Books = new Books();
+            //Books Books = new Books();
 
-
-
-
-
-
-
-            model.booklist = Books.GetList(model);
+            //model.booklist = Books.GetList(model);
 
             // var json = JsonConvert.SerializeObject(model.booklist);
-            return PartialView("_SearchBookPartial", model);
+            //return PartialView("_SearchBookPartial", model);
 
-
+            return View();
 
 
         }
 
 
-        public ActionResult AddBook()
+        public ActionResult AddBook(int Id)                                        //add book 
         {
            
             BooksViewModel Model = new BooksViewModel();
+            Books book = new Books();   
+            book.BookId = Id;
+            book.Load();
 
-            Books books = new Books();
+            Model.BookId = book.BookId;
+            Model.BookName = book.BookName;
+            Model.CategoryId = book.CategoryId;
+            Model.PublisherId = book.PublisherId;
+            Model.Quantity = book.Quantity;
+            Model.IsActive = book.IsActive;
 
 
 
@@ -297,19 +291,36 @@ namespace LibararyMVCNil.Controllers
 
             Books books = new Books();
 
+
+
+
+            books.BookId = Model.BookId;
             books.BookName = Model.BookName;
             books.CategoryId = Model.CategoryId;
             books.PublisherId = Model.PublisherId;
             books.Quantity = Model.Quantity;
             books.IsActive = Model.IsActive;
 
+            //Categories
+
+            Categories categories = new Categories();
+            Model.categorylist = categories.GetList();
+
+
+            //Publishers
+
+
+            Publishers Publisher = new Publishers();
+
+            Model.publisherlist = Publisher.GetList();
+
 
             books.Save();
 
-           
+           //return View(Model);
 
             return RedirectToAction("SearchBook1");
-        }
+        }      
 
 
 
