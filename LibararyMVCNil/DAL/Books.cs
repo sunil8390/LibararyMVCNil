@@ -220,6 +220,7 @@ namespace LibararyMVCNil.DAL
                         this.CategoryId = Convert.ToInt32(dt.Rows[0]["CategoryId"]);
                         this.PublisherId = Convert.ToInt32(dt.Rows[0]["PublisherId"]);
                         this.Quantity = Convert.ToInt32(dt.Rows[0]["Quantity"]);
+                        this.IsActive = Convert.ToBoolean(dt.Rows[0]["IsActive"]);
                         this.CreatedBy = Convert.ToInt32(dt.Rows[0]["CreatedBy"]);
                         this.CreatedOn = Convert.ToDateTime(dt.Rows[0]["CreatedOn"]);
                         this.ModifiedBy = Convert.ToInt32(dt.Rows[0]["ModifiedBy"]);

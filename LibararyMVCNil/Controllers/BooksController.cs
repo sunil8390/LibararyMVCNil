@@ -250,12 +250,13 @@ namespace LibararyMVCNil.Controllers
         }
 
 
-        public ActionResult AddBook(int Id)                                        //add book 
+        public ActionResult AddBook(int Id = 0)          /*int Id=0*/                              //add book and update 
         {
            
             BooksViewModel Model = new BooksViewModel();
-            Books book = new Books();   
+            Books book = new Books();
             book.BookId = Id;
+
             book.Load();
 
             Model.BookId = book.BookId;
@@ -293,7 +294,6 @@ namespace LibararyMVCNil.Controllers
 
 
 
-
             books.BookId = Model.BookId;
             books.BookName = Model.BookName;
             books.CategoryId = Model.CategoryId;
@@ -320,14 +320,14 @@ namespace LibararyMVCNil.Controllers
            //return View(Model);
 
             return RedirectToAction("SearchBook1");
-        }      
+        }
 
 
 
 
 
 
-
+       
 
 
 
