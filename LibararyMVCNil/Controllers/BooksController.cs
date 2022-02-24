@@ -157,11 +157,16 @@ namespace LibararyMVCNil.Controllers
             model.PageNumber = 1;
             model.RowsOfPage =10;
 
-            if (Session["records"] != null)
-            {
+            //session 
 
-                model = (BooksViewModel)Session["records"];
-            }
+
+            //(BooksViewModel) model = Session["record"];
+
+            //Session["record"] = BooksViewModel model;
+
+
+            
+
 
 
 
@@ -174,16 +179,18 @@ namespace LibararyMVCNil.Controllers
                 10
             };
 
+            model = (BooksViewModel)Session["records"];
 
 
-       
+
+
             //Categories
 
             Categories categories = new Categories();
             model.categorylist = categories.GetList();
 
 
-        //Publishers
+     //Publishers
 
             
             Publishers Publisher = new Publishers();
@@ -205,7 +212,7 @@ namespace LibararyMVCNil.Controllers
         {
 
 
-            Session["records"] = Model;
+          
 
 
             Books db = new Books();
@@ -225,7 +232,7 @@ namespace LibararyMVCNil.Controllers
 
            
 
-            //categories
+     //categories
             Categories categories = new Categories();
          
             Model.categorylist = categories.GetList();
@@ -240,10 +247,10 @@ namespace LibararyMVCNil.Controllers
             //  Model.TotalPages = 10 / Model.RowsOfPage;  //count
 
 
-            //session 
+     //session 
 
 
-
+            Session["records"] = Model;
 
 
             //return View(Model);
