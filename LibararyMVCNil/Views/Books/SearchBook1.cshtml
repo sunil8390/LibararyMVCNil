@@ -128,64 +128,64 @@
 
 
 <div class="main">
-    <div class="sub_main">
-        <label><b>Book Name</b></label>
+            <div class="sub_main">
+                <label><b>Book Name</b></label>
 
-        @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
 
-    </div>
+            </div>
 
-    <div class="sub_main">
-        <label><b>Category Type</b></label>
-        @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control" })
+            <div class="sub_main">
+                <label><b>Category Type</b></label>
+                @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control" })
 
-    </div>
-    <div class="sub_main">
-        <label><b>Publihser Name</b></label>
-        @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
+            </div>
+            <div class="sub_main">
+                <label><b>Publihser Name</b></label>
+                @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
 
-    </div>
-
-
-    <div class="sub_main">
-        @*<label><b>PageNumber</b></label>*@
-        @Html.HiddenFor(model => model.PageNumber, new { @class = "form-control" })
-
-    </div>
-
-    <div class="sub_main">
-        <label><b>RowsOfPage</b></label>
-
-        @Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.PageRange), " Please Select Page Range", new { @class = "form-control" })
-    </div>
-
-    <div class="sub_main">
-        @Html.HiddenFor(model => model.TotalPages)
+            </div>
 
 
+            <div class="sub_main">
+                @*<label><b>PageNumber</b></label>*@
+                @Html.HiddenFor(model => model.PageNumber, new { @class = "form-control" })
 
+            </div>
 
-    </div>
+            <div class="sub_main">
+                <label><b>RowsOfPage</b></label>
+
+                @Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.PageRange), " Please Select Page Range", new { @class = "form-control" })
+            </div>
+
+            <div class="sub_main">
+                @Html.HiddenFor(model => model.TotalPages)
 
 
 
 
-    <div class="sub_main">
+            </div>
 
-        <input type="button" onclick="BtnClick()" value="Search" class="btn btn-outline-success" style="margin-top:24px" />
 
-    </div>
-    <div class="sub_main">
 
-        <input type="reset" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
 
-    </div>
+            <div class="sub_main">
 
-    <div class="sub_main">
+                <input type="button" onclick="BtnClick()" value="Search" class="btn btn-outline-success" style="margin-top:24px" />
 
-        <a href="~/Books/AddBook"> <input type="button" name="name" value="Add" class="btn btn-outline-success" style="margin-top:24px" /></a>
+            </div>
+            <div class="sub_main">
 
-    </div>
+                <input type="reset" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
+
+            </div>
+
+            <div class="sub_main">
+
+                <a href="~/Books/AddBook"> <input type="button" name="name" value="Add" class="btn btn-outline-success" style="margin-top:24px" /></a>
+
+            </div>
 
 
 </div>
@@ -283,7 +283,7 @@
 
 
 
-    function BtnClick() {
+    function BtnClick() { 
         /* debugger;*/
 
 

@@ -116,63 +116,68 @@
     {
 
 
-<div class="main">
+        <div class="main">
 
-    <div class="sub_main">
+            <div class="sub_main">
+
+                @Html.HiddenFor(m => m.BookId)
+
+            </div>
+
+
+            <div class="sub_main">
+                <label><b>Book Name</b></label>
+
+                @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
+
+            </div>
+
+            <div class="sub_main">
+                <label><b>Category Type</b></label>
+                @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control" })
+
+            </div>
+            <div class="sub_main">
+                <label><b>Publihser Name</b></label>
+                @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
+
+            </div>
+
+            <div class="sub_main">
+                <label><b>Quantity</b></label>
+
+                @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control" })
+
+            </div>
+
+            <div class="sub_main">
+                <label><b>Is active</b></label>
+
+                @Html.CheckBoxFor(model => model.IsActive)
+
+            </div>
+
+            <div class="sub_main">
+
+                <input type="submit" value="Add" class="btn btn-outline-success" style="margin-top:24px" />
+                <input type="button" value="Cancle" class="btn btn-outline-info" style="margin-top:24px" />
+
+                <a href="~/Books/SearchBook1">Back to Search Book</a>
+
+            </div>
+
+        </div>
+
+
+    }
+
+
       
-        @Html.HiddenFor(m => m.BookId)
-
-    </div>
 
 
-    <div class="sub_main">
-        <label><b>Book Name</b></label>
-
-        @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
-
-    </div>
-
-    <div class="sub_main">
-        <label><b>Category Type</b></label>
-        @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control" })
-
-    </div>
-    <div class="sub_main">
-        <label><b>Publihser Name</b></label>
-        @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
-
-    </div>
-
-    <div class="sub_main">
-        <label><b>Quantity</b></label>
-
-        @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control" })
-
-    </div>
-
-    <div class="sub_main">
-        <label><b>Is active</b></label>
-
-        @Html.CheckBoxFor(model => model.IsActive)
-
-    </div>
-
-    <div class="sub_main">
-
-        <input type="submit" value="Add" class="btn btn-outline-success" style="margin-top:24px" />
-        <input type="button" value="Cancle" class="btn btn-outline-info" style="margin-top:24px" />
-
-        <a href="~/Books/SearchBook1">Back to Search Book</a>
-
-    </div>
-
-</div>
-
- 
 
 
-    }     
-    
-           
+
+
 </body>
 </html>

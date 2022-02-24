@@ -148,18 +148,24 @@ namespace LibararyMVCNil.Controllers
         public ActionResult SearchBook1() // int pager = 1  for paging //using model serach book catgeories and publisher 
 
         {
+
             BooksViewModel model =new BooksViewModel();
            
             Books Books = new Books();
+  
 
             model.PageNumber = 1;
             model.RowsOfPage =10;
 
-           
+            if (Session["records"] != null)
+            {
+
+                model = (BooksViewModel)Session["records"];
+            }
 
 
 
-            model.booklist = Books.GetList(model);
+            //model.booklist = Books.GetList(model);
 
             model.PageRange = new List<int>()
             {
@@ -167,6 +173,8 @@ namespace LibararyMVCNil.Controllers
                 5,
                 10
             };
+
+
 
        
             //Categories
@@ -182,7 +190,10 @@ namespace LibararyMVCNil.Controllers
            
             model.publisherlist = Publisher.GetList();
 
-          
+            
+
+
+
             return View(model);
 
            
@@ -192,7 +203,11 @@ namespace LibararyMVCNil.Controllers
         [HttpPost]
         public ActionResult SearchBook1(BooksViewModel Model) /* string Searching*/
         {
-           
+
+
+            Session["records"] = Model;
+
+
             Books db = new Books();
 
             //Model.PageRange = new List<int>()
@@ -222,7 +237,12 @@ namespace LibararyMVCNil.Controllers
             Model.publisherlist = Publisher.GetList();
 
 
-          //  Model.TotalPages = 10 / Model.RowsOfPage;  //count
+            //  Model.TotalPages = 10 / Model.RowsOfPage;  //count
+
+
+            //session 
+
+
 
 
 
@@ -281,6 +301,12 @@ namespace LibararyMVCNil.Controllers
 
             Model.publisherlist = Publisher.GetList();
 
+
+            //session 
+
+            //Session["Message"] = "Hello MVC!";
+
+
             return View(Model);
         }
 
@@ -317,7 +343,8 @@ namespace LibararyMVCNil.Controllers
 
             books.Save();
 
-           //return View(Model);
+
+            //return View(Model);
 
             return RedirectToAction("SearchBook1");
         }
