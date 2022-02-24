@@ -160,12 +160,13 @@ namespace LibararyMVCNil.Controllers
             //session 
 
 
-            //(BooksViewModel) model = Session["record"];
+           
+            if(Session["records"] != null)
+            { 
+            model = (BooksViewModel)Session["records"];
 
-            //Session["record"] = BooksViewModel model;
 
-
-            
+            }
 
 
 
@@ -179,7 +180,7 @@ namespace LibararyMVCNil.Controllers
                 10
             };
 
-            model = (BooksViewModel)Session["records"];
+           
 
 
 

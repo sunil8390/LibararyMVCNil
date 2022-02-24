@@ -14,8 +14,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>SearchBook1</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-   
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
 
         body {
@@ -25,6 +28,11 @@
 
         .main {
             display: flex;
+            margin: 4rem;
+        }
+
+        .main1 {
+            
             margin: 4rem;
         }
 
@@ -40,7 +48,6 @@
             text-align: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 700;
-            
         }
 
         #panel, #flip {
@@ -57,15 +64,14 @@
 
 
 
-        .pagelist ul{
-           
+        .pagelist ul {
             list-style-type: none;
             display: flex;
         }
 
             .pagelist ul li {
                 padding: 12px;
-                margin:7px;
+                margin: 7px;
                 border: solid;
             }
 
@@ -76,14 +82,12 @@
             padding: 10px;
             margin: 5px;
             margin-left: 1px;
-            border-radius:10px;
+            border-radius: 10px;
         }
 
-        .pagelist input:hover {
+            .pagelist input:hover {
                 background-color: #0094ff;
                 color: white;
-                
-
             }
 
 
@@ -97,13 +101,36 @@
             background-color: #f00;
         }
 
-        .paging-main{
-            display:flex;
+        .paging-main {
+            display: flex;
         }
 
 
-       
+        .content {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            text-align: center;
+            background-color: #e8eae6;
+            box-sizing: border-box;
+            padding: 10px;
+            z-index: 100;
+            display: none;
+            /*to hide popup initially*/
+        }
 
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            background-color: black;
+            color: white;
+            border-radius: 50%;
+            padding: 4px;
+        }
     </style>
 
 </head>
@@ -127,7 +154,7 @@
     {
 
 
-<div class="main">
+        <div class="main">
             <div class="sub_main">
                 <label><b>Book Name</b></label>
 
@@ -188,12 +215,91 @@
             </div>
 
 
-</div>
 
-        
+
+
+
+        </div>
+
+
 
 
     }
+
+
+
+
+    <button onclick="togglePopup()" class=" btn btn-outline-success">Add Book</button>
+
+    <!-- div containing the popup -->
+    <div class="content">
+        <div onclick="togglePopup()" class="close-btn">
+            ×
+        </div>
+        <h1>Add and Update Book</h1>
+
+
+        @using (Html.BeginForm("AddBook", "Books", FormMethod.Post))
+        {
+
+
+            <div class="main1">
+
+                <div class="sub_main">
+
+                    @Html.HiddenFor(m => m.BookId)
+
+                </div>
+
+
+                <div class="sub_main">
+                    <label><b>Book Name</b></label>
+
+                    @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
+
+                </div>
+
+                <div class="sub_main">
+                    <label><b>Category Type</b></label>
+                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control" })
+
+                </div>
+                <div class="sub_main">
+                    <label><b>Publihser Name</b></label>
+                    @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
+
+                </div>
+
+                <div class="sub_main">
+                    <label><b>Quantity</b></label>
+
+                    @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control" })
+
+                </div>
+
+                <div class="sub_main">
+                    <label><b>Is active</b></label>
+
+                    @Html.CheckBoxFor(model => model.IsActive)
+
+                </div>
+
+                <div class="sub_main">
+
+                    <input type="button"  value="Add" class="btn btn-outline-success" style="margin-top:24px" />
+                    <input type="button" value="Cancle" class="btn btn-outline-info" style="margin-top:24px" />
+
+                    <a href="~/Books/SearchBook1">Back to Search Book</a>
+
+                </div>
+
+            </div>
+
+
+        }
+    </div>
+
+    @*end add book popup*@ 
 
 
 
@@ -224,181 +330,187 @@
 
 
 
-<script>
+    <script>
 
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-        $("#flip").click(function () {
-            $("#panel").slideDown("slow");
+            $("#flip").click(function () {
+                $("#panel").slideDown("slow");
 
-        });
+            });
 
-        $("#panel").click(function () {
+            $("#panel").click(function () {
 
-            $("#panel").slideUp("slow");
-        });
-
-
-        $("#RowsOfPage").change(function () {                                    //on change event to row of pages
-            var selectDropdown = $("#RowsOfPage").val();
-            BtnClick(selectDropdown);
-        });
-
-        BtnClick();
-    });
-
-
-
-
-
-
-    $(document).on("click", "#PageNo", function () {                  //paging btn
-        $("#PageNumber").val($(this).val());
-
-
-        BtnClick();
-    })
-    $(document).on("click", "#next", function () {                     //next page btn
-
-     
-      
-        //if (parseInt($("#PageNumber").val()) < parseInt($("#TotalPages").val()) )  //parseInt($("#TotalPages").val())
-        //{
-
-        var increment = $("#PageNumber").val();
-
-        $("#PageNumber").val(++increment );
-        BtnClick();
-        //}         
-    });
-    $(document).on("click", "#previews", function () {                 //previews page btn
-       
-        if ($("#PageNumber").val() > 1) {
-            var decrement = $("#PageNumber").val();
-            $("#PageNumber").val(decrement - 1);
-            BtnClick();
-        }
-    });
-
-
-
-
-    function BtnClick() { 
-        /* debugger;*/
-
-
-        var valdata = $("#friendform").serialize();
-
-
-
-        //console.log(valdata);
-
-        $.ajax
-            ({
-                url: "/Books/SearchBook1", //get call on controller
-                method: "POST",
-                /* dataType: 'json',*/
-                data: valdata,
-                success: function (data) {
-                    $('#partial_table').html(data);
-
-
-                    //console.log(data);
-                    //data = JSON.parse(data);
-
-
-                    //Display table
-                    //var strtable = "<table>"
-
-                    //$.each(data.booklist, function (i, v1) {
-                    //    strtable +=
-                    //        "<tr><td>" + v1.BookId + "</td><td>" + v1.BookName + "</td><td>" + v1.CategoryName + "</td><td>" + v1.PublisherName + "</td><td>" + v1.Quantity + "</td></tr>";
-
-
-                    //});
-                    //strtable += "</table>";
-
-
-                    //$('#listdiv').html(strtable);
-
-
-
-
-
-
-
-                    //Implement Paging using list tag
-                    //var strPage = "<ul>"
-                    //for (var i = 1; i <= data.TotalPages; i++) {
-                    //    strPage += "<li><a href='' id='PageNo' >" + i + "</a></li>";
-
-                    //}
-                    //strPage += "</ul>"
-                    //$('#pagediv').html(strPage);
-
-
-
-                    //Implement Paging using button
-
-                    //var CurrentPage = data.PageNumber;
-                    //var fristpage = data.PageNumber;
-                    //var strPage = ""
-
-                    //$("#TotalPages").val(data.TotalPages);          //pass value to total page hidden fileld in form
-
-
-                    //page
-                    //for (var i = 1; i <= data.TotalPages; i++)
-                    //{
-                    //    debugger;
-                    //    if (i == CurrentPage) {
-                    //        strPage += "<input type='button' id='PageNo1'  value='"  + CurrentPage + "' />" ;
-                    //    }
-
-                    //    else
-                    //    {
-                    //        strPage += "<input type='button' id='PageNo'  value='" + i + "'/>";
-                    //    }
-                    //}
-
-                    //next page
-                    //var nextpage = ""
-
-
-                    //if (CurrentPage != data.TotalPages)
-                    //{
-                    //    nextpage += "<input type='button' id='next'  value='>>'/>"
-                    //}
-
-
-
-                    //previews page
-                    //var previewspage = ""
-                    //if (fristpage != 1)
-                    //{
-                    //     previewspage += "<input type='button' id='previews'  value='<<'/>"
-                    //}
-
-
-
-                    //$('#pagediv').html(strPage);
-                    //$('#pagenext').html(nextpage);
-                    //$('#pagepreviews').html(previewspage);
-
-
-                },
-
-
-                //error: function (err) {
-                //    alert("Somthing went Wrong... ");
-                //}
+                $("#panel").slideUp("slow");
             });
 
 
-    }
+            $("#RowsOfPage").change(function () {                                    //on change event to row of pages
+                var selectDropdown = $("#RowsOfPage").val();
+                BtnClick(selectDropdown);
+            });
 
 
 
-</script>
+
+            BtnClick();
+        });
+
+
+
+        // Function to show and hide the popup
+        function togglePopup() {
+            $(".content").toggle();
+        }
+
+
+        $(document).on("click", "#PageNo", function () {                  //paging btn
+            $("#PageNumber").val($(this).val());
+
+
+            BtnClick();
+        })
+        $(document).on("click", "#next", function () {                     //next page btn
+
+
+
+            //if (parseInt($("#PageNumber").val()) < parseInt($("#TotalPages").val()) )  //parseInt($("#TotalPages").val())
+            //{
+
+            var increment = $("#PageNumber").val();
+
+            $("#PageNumber").val(++increment);
+            BtnClick();
+            //}
+        });
+        $(document).on("click", "#previews", function () {                 //previews page btn
+
+            if ($("#PageNumber").val() > 1) {
+                var decrement = $("#PageNumber").val();
+                $("#PageNumber").val(decrement - 1);
+                BtnClick();
+            }
+        });
+
+
+
+
+        function BtnClick() {
+            /* debugger;*/
+
+
+            var valdata = $("#friendform").serialize();
+
+
+
+            //console.log(valdata);
+
+            $.ajax
+                ({
+                    url: "/Books/SearchBook1", //get call on controller
+                    method: "POST",
+                    /* dataType: 'json',*/
+                    data: valdata,
+                    success: function (data) {
+                        $('#partial_table').html(data);
+
+
+                        //console.log(data);
+                        //data = JSON.parse(data);
+
+
+                        //Display table
+                        //var strtable = "<table>"
+
+                        //$.each(data.booklist, function (i, v1) {
+                        //    strtable +=
+                        //        "<tr><td>" + v1.BookId + "</td><td>" + v1.BookName + "</td><td>" + v1.CategoryName + "</td><td>" + v1.PublisherName + "</td><td>" + v1.Quantity + "</td></tr>";
+
+
+                        //});
+                        //strtable += "</table>";
+
+
+                        //$('#listdiv').html(strtable);
+
+
+
+
+
+
+
+                        //Implement Paging using list tag
+                        //var strPage = "<ul>"
+                        //for (var i = 1; i <= data.TotalPages; i++) {
+                        //    strPage += "<li><a href='' id='PageNo' >" + i + "</a></li>";
+
+                        //}
+                        //strPage += "</ul>"
+                        //$('#pagediv').html(strPage);
+
+
+
+                        //Implement Paging using button
+
+                        //var CurrentPage = data.PageNumber;
+                        //var fristpage = data.PageNumber;
+                        //var strPage = ""
+
+                        //$("#TotalPages").val(data.TotalPages);          //pass value to total page hidden fileld in form
+
+
+                        //page
+                        //for (var i = 1; i <= data.TotalPages; i++)
+                        //{
+                        //    debugger;
+                        //    if (i == CurrentPage) {
+                        //        strPage += "<input type='button' id='PageNo1'  value='"  + CurrentPage + "' />" ;
+                        //    }
+
+                        //    else
+                        //    {
+                        //        strPage += "<input type='button' id='PageNo'  value='" + i + "'/>";
+                        //    }
+                        //}
+
+                        //next page
+                        //var nextpage = ""
+
+
+                        //if (CurrentPage != data.TotalPages)
+                        //{
+                        //    nextpage += "<input type='button' id='next'  value='>>'/>"
+                        //}
+
+
+
+                        //previews page
+                        //var previewspage = ""
+                        //if (fristpage != 1)
+                        //{
+                        //     previewspage += "<input type='button' id='previews'  value='<<'/>"
+                        //}
+
+
+
+                        //$('#pagediv').html(strPage);
+                        //$('#pagenext').html(nextpage);
+                        //$('#pagepreviews').html(previewspage);
+
+
+                    },
+
+
+                    //error: function (err) {
+                    //    alert("Somthing went Wrong... ");
+                    //}
+                });
+
+
+        }
+
+
+
+    </script>
 </body>
 </html>
