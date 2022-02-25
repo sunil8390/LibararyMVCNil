@@ -352,9 +352,11 @@ namespace LibararyMVCNil.Controllers
             books.Save();
 
 
-            //return View(Model);
+            // return View(Model);
+            return Json("1", JsonRequestBehavior.AllowGet);
 
-            return RedirectToAction("SearchBook1");
+            //return RedirectToAction("SearchBook1");
+            
         }
 
 
@@ -362,7 +364,7 @@ namespace LibararyMVCNil.Controllers
 
 
 
-       
+
 
 
 

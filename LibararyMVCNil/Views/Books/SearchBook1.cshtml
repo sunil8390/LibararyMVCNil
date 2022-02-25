@@ -214,11 +214,6 @@
 
             </div>
 
-
-
-
-
-
         </div>
 
 
@@ -232,14 +227,14 @@
     <button onclick="togglePopup()" class=" btn btn-outline-success">Add Book</button>
 
     <!-- div containing the popup -->
-    <div class="content">
+    <div class="content" >
         <div onclick="togglePopup()" class="close-btn">
             ×
         </div>
         <h1>Add and Update Book</h1>
 
 
-        @using (Html.BeginForm("AddBook", "Books", FormMethod.Post))
+        @using (Html.BeginForm("AddBook", "Books", FormMethod.Post, new { @id = "popUpForm" }))
         {
 
 
@@ -286,7 +281,7 @@
 
                 <div class="sub_main">
 
-                    <input type="button"  value="Add" class="btn btn-outline-success" style="margin-top:24px" />
+                    <input type="button" id="button_1"  value="Add" class="btn btn-outline-success" style="margin-top:24px" />
                     <input type="button" value="Cancle" class="btn btn-outline-info" style="margin-top:24px" />
 
                     <a href="~/Books/SearchBook1">Back to Search Book</a>
@@ -330,7 +325,7 @@
 
 
 
-    <script>
+<script>
 
         $(document).ready(function () {
 
@@ -357,11 +352,36 @@
         });
 
 
+    $("#button_1").click(function () {                                       //popup btn click submit data
+
+        var valdata = $("#popUpForm").serialize();
+
+                $.ajax
+                    ({
+                        url: "@(Url.Action("AddBook", "Books"))",
+                        method: "POST",
+                         data: valdata,
+                        success: function (data)
+                        {
+                            BtnClick();
+
+                            $('.content').hide();
+                            alert("Book add Sucessfuly");
+                         },
+
+                    });
+            });
+
+
 
         // Function to show and hide the popup
         function togglePopup() {
             $(".content").toggle();
         }
+
+        //btn submit
+
+
 
 
         $(document).on("click", "#PageNo", function () {                  //paging btn
@@ -370,6 +390,8 @@
 
             BtnClick();
         })
+
+
         $(document).on("click", "#next", function () {                     //next page btn
 
 
@@ -511,6 +533,6 @@
 
 
 
-    </script>
+</script>
 </body>
 </html>
