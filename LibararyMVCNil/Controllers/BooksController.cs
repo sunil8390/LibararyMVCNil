@@ -315,7 +315,8 @@ namespace LibararyMVCNil.Controllers
             //Session["Message"] = "Hello MVC!";
 
 
-            return View(Model);
+            //return View(Model);
+            return Json(Model, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -353,14 +354,28 @@ namespace LibararyMVCNil.Controllers
 
 
             // return View(Model);
-            return Json("1", JsonRequestBehavior.AllowGet);
+            return Json(Model, JsonRequestBehavior.AllowGet);
 
             //return RedirectToAction("SearchBook1");
             
         }
 
+        [HttpPost]
+        public ActionResult DeleteBook(int id )
+        {
+
+            Books book = new Books();
+            BooksViewModel model = new BooksViewModel();
+            
+            book.BookId = id;
+           
+            book.Delete();
+
+            return Json(model, JsonRequestBehavior.AllowGet);
 
 
+
+        }
 
 
 

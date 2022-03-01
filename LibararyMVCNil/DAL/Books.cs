@@ -545,7 +545,8 @@ namespace LibararyMVCNil.DAL
                                 CategoryName = dr["CategoryName"].ToString(),
                                 PublisherId = Convert.ToInt32(dr["PublisherId"]),
                                 PublisherName = dr["PublisherName"].ToString(),
-                               Quantity = Convert.ToInt32(dr["Quantity"])
+                               Quantity = Convert.ToInt32(dr["Quantity"]),
+                                IsActive = Convert.ToBoolean(dr["IsActive"])
                               
 
 

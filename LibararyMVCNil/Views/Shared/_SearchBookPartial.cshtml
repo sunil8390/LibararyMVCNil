@@ -102,7 +102,10 @@
                     <th>CategoryName</th>
                     <th>PublisherName</th>
                     <th>Quantity</th>
+                    <th>IsActive</th>
+
                     <td> Edit Book </td>
+                    <td> Delete Book </td>
 
                 </tr>
             </thead>
@@ -117,8 +120,17 @@
                     <td>@Book.CategoryName</td>
                     <td>@Book.PublisherName</td>
                     <td>@Book.Quantity</td>
+                    <td>@Book.IsActive</td>
                     @*<td> <a href="~/Books/AddBook"> Edit </a></td>*@
-                    <td>@Html.ActionLink("Edit", "AddBook", new { Id = Book.BookId })</td> @*update book*@ 
+                    @*<td>@Html.ActionLink("Edit", "AddBook", new { Id = Book.BookId })</td> update book*@
+
+
+                    <td><a href="#" data-id="@Book.BookId" id="EditBook">EditBook</a></td>
+
+                    <td><a href="#" onclick="deleteConfirm(@Book.BookId,'@Book.BookName')">Delete</a></td>
+
+
+
 
 
 

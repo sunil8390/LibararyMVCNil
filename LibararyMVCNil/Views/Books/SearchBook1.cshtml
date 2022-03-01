@@ -13,12 +13,14 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>SearchBook1</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <style>
 
         body {
@@ -32,7 +34,6 @@
         }
 
         .main1 {
-            
             margin: 4rem;
         }
 
@@ -149,104 +150,12 @@
 
     </div>
 
-
-    @using (Html.BeginForm("SearchBook1", "Books", FormMethod.Get, new { @id = "friendform" }))
-    {
-
-
-        <div class="main">
-            <div class="sub_main">
-                <label><b>Book Name</b></label>
-
-                @Html.TextBoxFor(model => model.BookName, new { @class = "form-control" })
-
-            </div>
-
-            <div class="sub_main">
-                <label><b>Category Type</b></label>
-                @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control" })
-
-            </div>
-            <div class="sub_main">
-                <label><b>Publihser Name</b></label>
-                @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control" })
-
-            </div>
-
-
-            <div class="sub_main">
-                @*<label><b>PageNumber</b></label>*@
-                @Html.HiddenFor(model => model.PageNumber, new { @class = "form-control" })
-
-            </div>
-
-            <div class="sub_main">
-                <label><b>RowsOfPage</b></label>
-
-                @Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.PageRange), " Please Select Page Range", new { @class = "form-control" })
-            </div>
-
-            <div class="sub_main">
-                @Html.HiddenFor(model => model.TotalPages)
-
-
-
-
-            </div>
-
-
-
-
-            <div class="sub_main">
-
-                <input type="button" onclick="BtnClick()" value="Search" class="btn btn-outline-success" style="margin-top:24px" />
-
-            </div>
-            <div class="sub_main">
-
-                <input type="reset" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
-
-            </div>
-
-            <div class="sub_main">
-
-                <a href="~/Books/AddBook"> <input type="button" name="name" value="Add" class="btn btn-outline-success" style="margin-top:24px" /></a>
-
-            </div>
-
-        </div>
-
-
-
-
-    }
-
-
-
-
-    <button onclick="togglePopup()" class=" btn btn-outline-success">Add Book</button>
-
-    <!-- div containing the popup -->
-    <div class="content" >
-        <div onclick="togglePopup()" class="close-btn">
-            ×
-        </div>
-        <h1>Add and Update Book</h1>
-
-
-        @using (Html.BeginForm("AddBook", "Books", FormMethod.Post, new { @id = "popUpForm" }))
+    <div class="col-lg-12">
+        @using (Html.BeginForm("SearchBook1", "Books", FormMethod.Get, new { @id = "friendform" }))
         {
 
 
-            <div class="main1">
-
-                <div class="sub_main">
-
-                    @Html.HiddenFor(m => m.BookId)
-
-                </div>
-
-
+            <div class="main">
                 <div class="sub_main">
                     <label><b>Book Name</b></label>
 
@@ -265,23 +174,117 @@
 
                 </div>
 
+
+                <div class="sub_main">
+                    @*<label><b>PageNumber</b></label>*@
+                    @Html.HiddenFor(model => model.PageNumber, new { @class = "form-control" })
+
+                </div>
+
+                <div class="sub_main">
+                    <label><b>RowsOfPage</b></label>
+
+                    @Html.DropDownListFor(model => model.RowsOfPage, new SelectList(Model.PageRange), " Please Select Page Range", new { @class = "form-control" })
+                </div>
+
+                <div class="sub_main">
+                    @Html.HiddenFor(model => model.TotalPages)
+
+
+
+
+                </div>
+
+
+
+
+                <div class="sub_main">
+
+                    <input type="button" onclick="BtnClick()" value="Search" class="btn btn-outline-success" style="margin-top:24px" />
+
+                </div>
+                <div class="sub_main">
+
+                    <input type="reset" value="Reset" class="btn btn-outline-info" style="margin-top:24px" />
+
+                </div>
+
+                <div class="sub_main">
+
+                    @*<a href="~/Books/AddBook"> <input type="button" name="name" value="Add" class="btn btn-outline-success" style="margin-top:24px" /></a>*@
+
+                </div>
+
+            </div>
+
+
+
+
+        }
+
+    </div>
+
+    <div class="col-lg-12">
+        <button onclick="showmodal()" class=" btn btn-outline-success">Add Book</button>
+    </div>
+
+
+    <!-- div containing the popup -->
+    <div class="content">
+        <div onclick="Hide()" class="close-btn">
+            ×
+        </div>
+        <h1>Add and Update Book</h1>
+
+
+        @using (Html.BeginForm("AddBook", "Books", FormMethod.Post, new { @id = "popUpForm" }))
+        {
+
+
+            <div class="main1">
+
+                <div class="sub_main">
+
+                    @Html.HiddenFor(m => m.BookId, new { @id = "InsertBookId" })
+
+                </div>
+
+
+                <div class="sub_main">
+                    <label><b>Book Name</b></label>
+
+                    @Html.TextBoxFor(model => model.BookName, new { @class = "form-control", @id = "InsertBookName" })
+
+                </div>
+
+                <div class="sub_main">
+                    <label><b>Category Type</b></label>
+                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.categorylist, "CategoryId", "CategoryName"), "Select Category", new { @class = "form-control", @id = "InsertCategoryId" })
+
+                </div>
+                <div class="sub_main">
+                    <label><b>Publihser Name</b></label>
+                    @Html.DropDownListFor(model => model.PublisherId, new SelectList(Model.publisherlist, "PublisherId", "PublisherName"), "Select Publisher", new { @class = "form-control", @id = "InsertPublisherId" })
+
+                </div>
+
                 <div class="sub_main">
                     <label><b>Quantity</b></label>
 
-                    @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control", @id = "InsertQuantity" })
 
                 </div>
 
                 <div class="sub_main">
                     <label><b>Is active</b></label>
 
-                    @Html.CheckBoxFor(model => model.IsActive)
+                    @Html.CheckBoxFor(model => model.IsActive, new { @id = "InsertIsActive" })
 
                 </div>
 
                 <div class="sub_main">
 
-                    <input type="button" id="button_1"  value="Add" class="btn btn-outline-success" style="margin-top:24px" />
+                    <input type="button" id="button_1" value="Add" class="btn btn-outline-success" style="margin-top:24px" />
                     <input type="button" value="Cancle" class="btn btn-outline-info" style="margin-top:24px" />
 
                     <a href="~/Books/SearchBook1">Back to Search Book</a>
@@ -294,38 +297,90 @@
         }
     </div>
 
-    @*end add book popup*@ 
+    @*end add book popup*@
+
+
+    @*delete book Popup*@
+
+    @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Delete Book</button>*@
+
+    
+
+        <!-- Trigger the modal with a button -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Confirm Delete Book</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        @using (Html.BeginForm("DeleteBook", "Books", FormMethod.Post))
+                        {
+
+                            <div class="form-group">
+                                <span>
+                                    Are you sure you want to delete?
+                                </span>
+                                <strong id="deletedValueName">
+                                </strong>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="BookId" hidden>BookId</label>
+                                @Html.HiddenFor(m => m.BookId, new { @class = "form-control", @id = "DeleteBookId" })
+                            </div>
 
 
 
-    <div id="partial_table"></div>    @*partial table*@
+                            <div class="modal-footer">
+                                <button type="button" name="Submit" id="btnconfirmdelete" value="submit" class="btn btn-info">Confirm</button>
+                                <button type="button" id="btnDeleteBookCancel" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 
-    <div id="partialpaging"> </div>    @*partial paging btn*@
+                            </div>
+
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
 
-    <div id="partiallable"> </div>      @*partial lable*@
 
 
-
-    <!--<div class="paging-main">
-
-                <div id="pagepreviews" class="pagelist"></div>-->
-    @*paging --*@
-    <!--<div id="pagediv" class="pagelist"> </div>-->               @*paging*@
-
-    <!--<div id="pagenext" class="pagelist"></div>-->              @*paging  ++*@
-
-    <!--</div>-->
-
+    @*end delete book popup*@
 
 
 
 
 
+    <div id="partial_table"></div> @*partial table*@
+
+    <div id="partialpaging"> </div> @*partial paging btn*@
+
+
+    <div id="partiallable"> </div> @*partial lable*@
 
 
 
-<script>
+
+
+
+
+
+
+
+
+
+
+    <script>
 
         $(document).ready(function () {
 
@@ -375,21 +430,130 @@
 
 
         // Function to show and hide the popup
-        function togglePopup() {
-            $(".content").toggle();
+        //function togglePopup() {
+        //    $(".content").toggle();
+        //}
+
+
+        function showmodal() {
+            $(".content").show();
         }
 
-        //btn submit
+
+        function Hide() {
+            $(".content").hide();
+            }
+
+
+        //delete
 
 
 
 
-        $(document).on("click", "#PageNo", function () {                  //paging btn
-            $("#PageNumber").val($(this).val());
 
 
-            BtnClick();
+
+
+
+
+        // edit option popup
+
+        $(document).on("click", "#EditBook", function () {                  //paging btn
+
+            var Id = $(this).data('id');
+
+            $.ajax({
+
+                url: "/Books/AddBook",
+                type: "GET",
+                data: { Id: Id },
+                success: function (data) {
+                    //console.log(data);
+
+
+
+                    debugger;
+
+                    $("#InsertBookId").val(data.BookId);
+                    $("#InsertBookName").val(data.BookName);
+                    $("#InsertQuantity").val(data.Quantity);
+                    $("#InsertCategoryId").val(data.CategoryId);
+                    $("#InsertPublisherId").val(data.PublisherId);
+
+                    //$("#InsertIsActive").val(data.IsActive);
+
+
+                    if (data.IsActive = true) {
+                        var element = $("#InsertIsActive").val(data.IsActive);
+                        element.prop('checked', true);
+
+                    } else {
+                        var element = $("#InsertIsActive").val(data.IsActive);
+                        element.prop('checked', false);
+
+                    }
+
+
+
+
+
+
+                    //$('.content').show();
+                    //alert(data);
+
+                    $('.content').show();
+
+
+                   /* BtnClick();*/
+
+                }
+
+
+            })
+
+
         })
+
+
+        // edit option popup end
+
+
+
+       // Delete Book
+        var deleteConfirm = function (id, val)
+
+        {
+            //alert(val);
+            //console.log(val)
+            debugger;
+            $('#DeleteBookId').val(id);
+            $('#deletedValueName').text(val);
+
+            $('#myModal').modal('show');
+
+
+        };
+
+        $(document).on("click", "#btnconfirmdelete", function () {
+
+            debugger;
+            var Id = $("#DeleteBookId").val();
+            $.ajax({
+                url: "/Books/DeleteBook",
+                type: "POST",
+                data: { id: Id },
+                success: function (data) {
+                        
+                   
+                    $("#myModal").modal('hide');
+                    BtnClick();
+                }
+            })
+        });
+
+        //end delete book
+
+
 
 
         $(document).on("click", "#next", function () {                     //next page btn
@@ -533,6 +697,6 @@
 
 
 
-</script>
+    </script>
 </body>
 </html>
