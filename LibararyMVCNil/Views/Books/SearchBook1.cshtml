@@ -601,95 +601,14 @@
                         $('#partial_table').html(data);
 
 
-                        //console.log(data);
-                        //data = JSON.parse(data);
-
-
-                        //Display table
-                        //var strtable = "<table>"
-
-                        //$.each(data.booklist, function (i, v1) {
-                        //    strtable +=
-                        //        "<tr><td>" + v1.BookId + "</td><td>" + v1.BookName + "</td><td>" + v1.CategoryName + "</td><td>" + v1.PublisherName + "</td><td>" + v1.Quantity + "</td></tr>";
-
-
-                        //});
-                        //strtable += "</table>";
-
-
-                        //$('#listdiv').html(strtable);
-
-
-
-
-
-
-
-                        //Implement Paging using list tag
-                        //var strPage = "<ul>"
-                        //for (var i = 1; i <= data.TotalPages; i++) {
-                        //    strPage += "<li><a href='' id='PageNo' >" + i + "</a></li>";
-
-                        //}
-                        //strPage += "</ul>"
-                        //$('#pagediv').html(strPage);
-
-
-
-                        //Implement Paging using button
-
-                        //var CurrentPage = data.PageNumber;
-                        //var fristpage = data.PageNumber;
-                        //var strPage = ""
-
-                        //$("#TotalPages").val(data.TotalPages);          //pass value to total page hidden fileld in form
-
-
-                        //page
-                        //for (var i = 1; i <= data.TotalPages; i++)
-                        //{
-                        //    debugger;
-                        //    if (i == CurrentPage) {
-                        //        strPage += "<input type='button' id='PageNo1'  value='"  + CurrentPage + "' />" ;
-                        //    }
-
-                        //    else
-                        //    {
-                        //        strPage += "<input type='button' id='PageNo'  value='" + i + "'/>";
-                        //    }
-                        //}
-
-                        //next page
-                        //var nextpage = ""
-
-
-                        //if (CurrentPage != data.TotalPages)
-                        //{
-                        //    nextpage += "<input type='button' id='next'  value='>>'/>"
-                        //}
-
-
-
-                        //previews page
-                        //var previewspage = ""
-                        //if (fristpage != 1)
-                        //{
-                        //     previewspage += "<input type='button' id='previews'  value='<<'/>"
-                        //}
-
-
-
-                        //$('#pagediv').html(strPage);
-                        //$('#pagenext').html(nextpage);
-                        //$('#pagepreviews').html(previewspage);
-
+                      
 
                     },
 
 
-                    //error: function (err) {
-                    //    alert("Somthing went Wrong... ");
-                    //}
+                    error: function (err) {
+                        alert("Somthing went Wrong... ");
+                    }
                 });
 
 
